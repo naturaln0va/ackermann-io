@@ -19,3 +19,17 @@ li input {
 	float: right;
 	display: inline;
 }
+
+/* --- iOS --- */
+
+/* Portrait */
+@media only screen and (min-device-width: 320px) and (max-device-width: 667px) {
+	#wrapper {
+		width: 90%;
+		max-width: 1175px;
+	}
+
+	input {
+		font-size: 0.55em;
+	}
+}

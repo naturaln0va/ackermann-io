@@ -73,3 +73,28 @@ body article a {
   width: 100%;
   background: #27b1b1;
 }
+
+/* --- iOS --- */
+
+/* Portrait */
+@media only screen and (min-device-width: 320px) and (max-device-width: 667px) {
+
+  .topstrip {
+    height: 8px;
+  }
+  html {
+    font-size: 2.1em;
+  }
+  body article {
+    width: 90%;
+    max-width: 1175px;
+  }
+  .navigation ul {
+    text-align: center;
+  }
+  .navigation li {
+    font-size: 1.35em;
+    padding: 45px 20px;
+  }
+
+}

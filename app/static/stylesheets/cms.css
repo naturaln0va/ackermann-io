@@ -18,7 +18,7 @@ ul {
 
 li.file {
 	list-style: none;
-	padding: 12px 0;
+	padding: 30px 0;
 	border-bottom: 1px solid #ddd;
 }
 
@@ -42,4 +42,18 @@ form p {
 
 form input[type=submit] {
 	float: right;
+}
+
+/* --- iOS --- */
+
+/* Portrait */
+@media only screen and (min-device-width: 320px) and (max-device-width: 667px) {
+	#wrapper {
+		width: 90%;
+		max-width: 1175px;
+	}
+
+	input {
+		font-size: 0.45em;
+	}
 }
