@@ -1,0 +1,16 @@
+
+{% extends "base.html" %}
+
+{% block stylesheet %}
+	<link rel="stylesheet" type="text/css" href="/static/stylesheets/login.css">
+{% endblock%}
+
+{% block content %}
+	<article>
+		<form method="POST">
+			<p>Enter password to continue:</p>
+			<p><input type="password" name="password"></p>
+			<p><input type="submit"></p>
+		</form>
+	</article>
+{% endblock %}

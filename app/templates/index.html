@@ -1,4 +1,22 @@
+
 {% extends "base.html" %}
+
+{% block stylesheet %}
+	<link rel="stylesheet" type="text/css" href="/static/stylesheets/post_list.css">
+{% endblock%}
+
 {% block content %}
-	<h1>Hello, welcome to ackermann.io</h1>
+	<article>
+		{% for post in posts %}
+			<div class="post">
+				<div id="titledate">
+					<a href="/posts/{{ post.slug }}"><h2 id="title">{{ post.title }}</h2></a>
+					<div id="date">{{ post.timestamp|prettytime }}</div>
+				</div>
+				<div id="preview">
+					{{ post.description }}
+				</div>
+			</div>
+		{% endfor %}
+	</article>
 {% endblock %}

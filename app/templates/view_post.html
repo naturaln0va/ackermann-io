@@ -1,0 +1,18 @@
+
+{% extends "base.html" %}
+
+{% block stylesheet %}<link rel="stylesheet" type="text/css" href="/static/stylesheets/post.css">{% endblock %}
+
+{% block content %}
+	<article>
+		<h1 id="title">{{ post.title }}</h1>
+		<p id="timestamp">{{ post.timestamp|prettytime }}</p>
+		<p><em>{{ post.description }}</em></p>
+		<hr>
+		<p>{{ post.content|markdown }}</p>
+	</article>
+	<div id="share-button">
+		<a href="https://twitter.com/share" class="twitter-share-button" data-size="large" data-via="naturaln0va" data-show-count="false">Tweet</a><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+	</div>
+	<footer>&copy; 2016 Ryan Ackermann</footer>
+{% endblock %}

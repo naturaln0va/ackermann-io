@@ -1,0 +1,75 @@
+
+/* Imports */ 
+@import url(https://fonts.googleapis.com/css?family=PT+Mono);
+
+/* Generic */
+::-webkit-resizer {
+  display: none;
+  cursor: pointer;
+}
+::-moz-selection {
+  text-shadow: none;
+  text-decoration: none;
+  background: rgba(231, 231, 0, 0.45);
+}
+::selection {
+  text-shadow: none;
+  text-decoration: none;
+  background: rgba(231, 231, 0, 0.45);
+}
+
+/* Body */
+body {
+  font-family: 'PT Mono', monospace, serif;
+  background: #FFF;
+  text-align: left;
+  margin: 0;
+}
+body h1 {
+  font-size: 1.6em;
+}
+body h2 {
+  font-size: 1.4em;
+}
+body h3 {
+  font-size: 1.225em;
+}
+body article {
+  width: 85%;
+  margin: 0 auto;
+  max-width: 690px;
+  padding: 8px 0px;
+}
+body article a {
+  color: #27b1b1;
+}
+
+/* Navigation */
+.navigation {
+  margin: 0;
+  padding: 10px;
+}
+.navigation ul {
+  text-align: left;
+  padding: 0;
+  margin: 0;
+}
+.navigation li {
+  display: inline-block;
+  list-style: none;
+  padding: 30px 15px;
+}
+.navigation li a {
+  text-decoration: none;
+  color: #27b1b1;
+}
+
+/* Extras */
+.topstrip {
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  height: 4px;
+  width: 100%;
+  background: #27b1b1;
+}

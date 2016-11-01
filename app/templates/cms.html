@@ -1,0 +1,24 @@
+
+{% extends "base.html" %}
+
+{% block stylesheet %}<link rel="stylesheet" type="text/css" href="/static/stylesheets/cms.css">{% endblock %}
+
+{% block content %}
+	<div id="wrapper">
+		<h1>File Manager</h1>
+		<form method="POST" enctype="multipart/form-data">
+			<p>Upload a new asset: <input type="file" name="file"></p>
+			<p><input type="submit" value="Upload"></p>
+		</form>
+		<ul>
+			{% for item in items %}
+			    <li class="file">
+			    	<a href="/static/assets/{{ item['name'] }}">{{ item['name'] }}</a> - {{ item['size']|filesizeformat(item['size']) }}
+			    	<input type="submit" name="{{ item['name'] }}" value="Delete" onclick="buttonClicked(this)">
+			    </li>
+			{% endfor %}
+		</ul>
+	</div>
+{% endblock %}
+
+{% block scripts %}<script type="text/javascript" src="/static/scripts/cms.js"></script>{% endblock %}

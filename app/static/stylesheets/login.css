@@ -1,0 +1,33 @@
+
+input[type=password] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+	font-size: 1.05em;
+	border: 2px solid #ccc;
+	border-radius: 3px;
+	outline: none;
+}
+
+input[type=password]:focus {
+    border-color: #121212;
+}
+
+input[type=button], input[type=submit] {
+	-webkit-transition: background-color 0.4s ease-in-out;
+    transition: background-color 0.4s ease-in-out;
+    background-color: #27b1b1;
+    border: none;
+    border-radius: 3px;
+    color: white;
+    padding: 12px 40px;
+    font-size: 1.15em;
+    text-decoration: none;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+
+input[type=button], input[type=submit]:hover {
+	background-color: #23a1a1;
+}

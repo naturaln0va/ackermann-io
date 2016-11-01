@@ -1,0 +1,24 @@
+
+.content-item {
+	height: 100px;
+	margin: 40px 0;
+}
+.content-item h2 {
+	margin-bottom: 2px;
+	padding-bottom: 2px;
+}
+.content-item p {
+	margin-top: 2px;
+	padding-top: 2px;
+}
+.content-item img {
+	height: auto;
+	max-width: 100%;
+	max-height: 100%;
+	display: inline-block;
+	float: left;
+	box-shadow: 0 0 3px rgba(0, 0, 0, 0.3), inset 0 0 2px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.25);
+	margin-right: 20px;
+	box-sizing: border-box;
+	border-radius: 20px;
+}

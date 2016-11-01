@@ -1,0 +1,20 @@
+
+{% extends "base.html" %}
+
+{% block stylesheet %}<link rel="stylesheet" type="text/css" href="/static/stylesheets/drafts.css">{% endblock %}
+
+{% block content %}
+	<article>
+		<h2>Drafts</h2>
+		{% for draft in drafts %}
+			<li class="item">
+				<a href="/drafts/{{ draft.slug }}">{{ draft.title }}</a>
+				<input type="submit" name="{{ draft.title }},{{ draft.id }}" value="Delete" onclick="buttonClicked(this)">
+				<input type="submit" name="{{ draft.title }},{{ draft.id }}" value="Edit" onclick="buttonClicked(this)">
+				<input type="submit" name="{{ draft.title }},{{ draft.id }}" value="Publish" onclick="buttonClicked(this)">
+			</li>
+		{% endfor %}
+	</article>
+{% endblock %}
+
+{% block scripts %}<script type="text/javascript" src="/static/scripts/drafts.js"></script>{% endblock %}

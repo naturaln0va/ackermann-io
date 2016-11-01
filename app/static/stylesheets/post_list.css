@@ -1,0 +1,33 @@
+
+.post {
+	margin-bottom: 15px;
+	border-bottom: 1px solid #ddd;
+}
+.post #titledate {
+	padding: .5em 0;
+}
+.post #titledate a {
+	text-decoration: none;
+	color: #000;
+}
+.post #titledate a:hover {
+	text-decoration: underline;
+}
+.post #titledate #title {
+	display: inline;
+}
+.post #titledate #date {
+	float: right;
+	display: inline;
+	color: #aaa;
+}
+.post #preview {
+	padding-bottom: 12px;
+}
+
+#headline {
+	margin-bottom: 0.5em;
+}
+#date {
+	color: #aaa;
+}

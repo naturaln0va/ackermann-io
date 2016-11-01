@@ -1,0 +1,39 @@
+
+article code {
+	font-family: monospace;
+	white-space: pre;
+	background: #eee;
+}
+article img {
+	width: auto;
+	max-height: 450px;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+article blockquote {
+	color: #989898;
+	border-left: 4px solid #eee;
+	padding-left: 20px;
+	margin: 0;
+}
+
+footer {
+  left: 0px;
+  bottom: 0px;
+  width: 100%;
+  padding: 18px 8px;
+  text-align: center;
+  font-size: 0.75em;
+  background-color: #FFF;
+}
+
+#timestamp {
+	color: #aaa;
+}
+
+#share-button {
+	margin: 0 auto;
+	text-align: center;
+}

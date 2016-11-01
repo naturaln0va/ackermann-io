@@ -1,0 +1,26 @@
+
+{% extends "base.html" %}
+
+{% block stylesheet %}
+	<link rel="stylesheet" type="text/css" href="/static/stylesheets/quakes.css">
+{% endblock%}
+
+{% block content %}
+
+	<article>
+	    <div class="center">
+			<h1>Quakes - Earthquake Utility</h1>
+			<br>
+			<a href="https://itunes.apple.com/us/app/quakes-earthquake-utility/id1071904740?mt=8" style="display:inline-block;overflow:hidden;background:url(https://linkmaker.itunes.apple.com/images/badges/en-us/badge_appstore-lrg.svg) no-repeat;width:165px;height:40px;"></a>
+			<br>
+			<img class="screenshot" src="/static/assets/quakes_detail_screen.jpg">
+			<img class="screenshot" src="/static/assets/quakes_home_screen.jpg">
+		</div>
+		<p>Quakes is an elegant earthquake utility. A simple easy to use interface will help you stay updated with the latest earthquake activity.</p><p>Easily view details of the world’s most recent earthquakes. Narrow your search to a specific area using a map.</p><p>Find the quakes near a specific area or view all the recent world quakes. Stay alert with local notifications about the amount of quake activity around you or the world.</p>
+		<div class="center">
+			<a href="mailto:support@ackermann.io">Contact Ryan</a> | <a href="/static/assets/quakes.zip">Download Presskit</a>
+		</div>
+		<footer>&copy; 2016 Ryan Ackermann</footer>
+	</article>
+
+{% endblock %}

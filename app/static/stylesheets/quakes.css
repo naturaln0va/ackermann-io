@@ -1,0 +1,32 @@
+
+article h1 {
+	color: #111111;
+	margin-bottom: 0.25em;
+}
+article img {
+	display: inline-block;
+	padding: 0 0.4em;
+}
+
+footer {
+  left: 0px;
+  bottom: 0px;
+  width: 100%;
+  padding: 18px 8px;
+  text-align: center;
+  font-size: 0.75em;
+  background-color: #FFF;
+}
+
+.center {
+	margin: 0 auto;
+	text-align: center;
+}
+
+.link {
+	width: 260px;
+}
+.screenshot {
+	margin-top: 2em;
+	width: 200px;
+}

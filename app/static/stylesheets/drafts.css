@@ -1,0 +1,21 @@
+
+ul {
+	margin: 0;
+	padding: 0;
+	padding-top: 15px;
+}
+
+li.item {
+	list-style: none;
+	padding: 12px 0;
+	border-bottom: 1px solid #ddd;
+}
+
+li.item a {
+	color: #222;
+}
+
+li input {
+	float: right;
+	display: inline;
+}

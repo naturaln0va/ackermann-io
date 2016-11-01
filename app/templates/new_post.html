@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block stylesheet %}
+	{{ pagedown.include_pagedown() }}
+	<link rel="stylesheet" type="text/css" href="/static/stylesheets/new_post.css">
+{% endblock%}
+
+{% block content %}
+	<article>
+		<h1>New Post</h1>
+		<form method="POST">
+			{{ form.hidden_tag() }}
+			<p>
+				Title:<br>{{ form.title }}<br>
+				Description:<br>{{ form.description }}
+			</p>
+			<p>Content:{{ form.content }}</p>
+			<p>{{ form.draft }} Draft?</p>
+			<p>{{ form.save }}</p>
+		</form>
+	</article>
+{% endblock %}

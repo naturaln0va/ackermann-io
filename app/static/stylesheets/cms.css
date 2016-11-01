@@ -1,0 +1,45 @@
+
+#wrapper {
+	width: 60%;
+	margin: 0 auto;
+	max-width: 690px;
+	padding: 8px 0px;
+}
+
+#wrapper h1 {
+	text-align: center;
+}
+
+ul {
+	margin: 0;
+	padding: 0;
+	padding-top: 15px;
+}
+
+li.file {
+	list-style: none;
+	padding: 12px 0;
+	border-bottom: 1px solid #ddd;
+}
+
+li.file a {
+	color: #222;
+}
+
+li input {
+	float: right;
+	display: inline;
+}
+
+form {
+    background-color: #f3f3f3;
+    padding: 12px 0;
+}
+
+form p {
+	display: inline;
+}
+
+form input[type=submit] {
+	float: right;
+}
