@@ -27,7 +27,7 @@ def has_auth():
 
 @app.route('/')
 def index():
-	posts = Post.query.filter_by(draft=False).all()
+	posts = Post.query.order_by(Post.timestamp.desc()).filter_by(draft=False).all()
 	return render_template('index.html', posts=posts, auth=has_auth())
 
 @app.route('/posts/<slug>')
@@ -67,7 +67,7 @@ def quakes():
 def drafts():
 	if not has_auth():
 		return redirect('/login')
-	drafts = Post.query.filter_by(draft=True)
+	drafts = Post.query.order_by(Post.timestamp.desc()).filter_by(draft=True).all()
 	return render_template('drafts.html', drafts=drafts, auth=has_auth())
 
 @app.route('/drafts/<slug>')
