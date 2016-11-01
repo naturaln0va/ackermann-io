@@ -4,15 +4,25 @@
 {% block stylesheet %}<link rel="stylesheet" type="text/css" href="/static/stylesheets/post.css">{% endblock %}
 
 {% block content %}
-	<article>
+	<article style="{% if post.draft %}background-color: #f8f8f8;{% endif %}">
+		{% if auth and not post.draft %}
+			<input type="submit" name="{{ post.id }}" value="Edit Post" onclick="buttonClicked(this)">
+		{% endif %}
+		{% if post.draft %}
+			<div style="text-align: center;margin: 0 auto;font-weight: bold;">Draft</div>
+		{% endif %}
 		<h1 id="title">{{ post.title }}</h1>
 		<p id="timestamp">{{ post.timestamp|prettytime }}</p>
 		<p><em>{{ post.description }}</em></p>
 		<hr>
 		<p>{{ post.content|markdown }}</p>
 	</article>
-	<div id="share-button">
-		<a href="https://twitter.com/share" class="twitter-share-button" data-size="large" data-via="naturaln0va" data-show-count="false">Tweet</a><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
-	</div>
+	{% if not post.draft %}
+		<div id="share-button">
+			<a href="https://twitter.com/share" class="twitter-share-button" data-size="large" data-via="naturaln0va" data-show-count="false">Tweet</a><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+		</div>
+	{% endif %}
 	<footer>&copy; 2016 Ryan Ackermann</footer>
 {% endblock %}
+
+{% block scripts %}<script type="text/javascript" src="/static/scripts/post.js"></script>{% endblock %}

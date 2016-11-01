@@ -14,8 +14,6 @@ db = SQLAlchemy(app)
 pagedown = PageDown(app)
 mkd = Markdown(app)
 
-from app import views, models
-
 # filters
 
 @app.template_filter('prettytime')
@@ -30,3 +28,5 @@ if os.environ.get('HEROKU') is not None:
     app.logger.addHandler(stream_handler)
     app.logger.setLevel(logging.INFO)
     app.logger.info('ackermann.io')
+
+from app import views, models

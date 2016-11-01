@@ -11,12 +11,12 @@ from .models import Post
 
 @app.errorhandler(404)
 def not_found_error(error):
-    return render_template('404.html', title='404'), 404
+    return render_template('404.html', title='404', auth=has_auth()), 404
 
 @app.errorhandler(500)
 def internal_error(error):
     db.session.rollback()
-    return render_template('500.html', title='500'), 500
+    return render_template('500.html', title='500', auth=has_auth()), 500
 
 # Authentication
 
@@ -123,8 +123,6 @@ def new_post():
 		description = form.description.data
 		content = form.content.data
 		draft = form.draft.data
-
-		print '\n***\nTitle: ' + title + '\nDescription: ' + description + '\nData: ' + content + '\nDraft: ' + str(draft) + '\n***\n'
 
 		post = Post(title, description, content)
 		db.session.add(post)
