@@ -66,4 +66,8 @@ input[type=button], input[type=submit]:hover {
          -webkit-appearance: none;
          border-radius: 7px;
     }
+
+    article img {
+      max-height: 800px;
+    }
 }
