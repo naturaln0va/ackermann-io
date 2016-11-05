@@ -27,8 +27,7 @@
 /* Portrait */
 @media only screen and (min-device-width: 320px) and (max-device-width: 667px) {
 	.content-item img {
-		width: 150px;
-		border-radius: 32px;
-		box-shadow: 0 0 6px rgba(0, 0, 0, 0.3), inset 0 0 4px rgba(0, 0, 0, 0.5), inset 0 2px 0 rgba(255, 255, 255, 0.25);
+		width: 80px;
+		border-radius: 18px;
 	}	
 }
