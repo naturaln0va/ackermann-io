@@ -37,8 +37,7 @@ body h3 {
 body article {
   width: 85%;
   margin: 0 auto;
-  max-width: 690px;
-  padding: 8px 0px;
+  max-width: 840px;
 }
 body article a {
   color: #27b1b1;
@@ -48,6 +47,7 @@ body article a {
 .navigation {
   margin: 0;
   padding: 10px;
+  padding-bottom: 0;
 }
 .navigation ul {
   text-align: left;
@@ -78,23 +78,22 @@ body article a {
 
 /* Portrait */
 @media only screen and (min-device-width: 320px) and (max-device-width: 667px) {
+  input[type="text"],
+  input[type="button"],
+  input[type="submit"] {
+       -webkit-appearance: none;
+       border-radius: 7px;
+  }
 
-  .topstrip {
-    height: 8px;
-  }
-  html {
-    font-size: 2.1em;
-  }
   body article {
     width: 90%;
-    max-width: 1175px;
   }
+
   .navigation ul {
     text-align: center;
   }
-  .navigation li {
-    font-size: 1.35em;
-    padding: 45px 20px;
-  }
 
+  .navigation li {
+    padding: 20px 10px;
+  }
 }

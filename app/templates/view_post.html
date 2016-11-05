@@ -1,7 +1,12 @@
 
 {% extends "base.html" %}
 
-{% block stylesheet %}<link rel="stylesheet" type="text/css" href="/static/stylesheets/post.css">{% endblock %}
+{% block stylesheet %}
+	<link rel="stylesheet" type="text/css" href="/static/stylesheets/post.css">
+	<link rel="stylesheet" type="text/css" href="/static/stylesheets/github.css">
+	<script src="/static/scripts/highlight.pack.js" type="text/javascript" charset="utf-8"></script>
+	<script>hljs.initHighlightingOnLoad();</script>
+{% endblock %}
 
 {% block content %}
 	<article style="{% if post.draft %}background-color: #f8f8f8;{% endif %}">
@@ -19,7 +24,7 @@
 	</article>
 	{% if not post.draft %}
 		<div id="share-button">
-			<a href="https://twitter.com/share" class="twitter-share-button" data-size="large" data-via="naturaln0va" data-show-count="false">Tweet</a>
+			<a href="https://twitter.com/share" class="twitter-share-button" data-size="large" data-via="naturaln0va" data-show-count="false">Tweet</a><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
 		</div>
 	{% endif %}
 	<footer>&copy; 2016 Ryan Ackermann</footer>
@@ -27,22 +32,4 @@
 
 {% block scripts %}
 	<script type="text/javascript" src="/static/scripts/post.js"></script>
-	<script>
-		window.twttr = (function(d, s, id) {
-			var js, fjs = d.getElementsByTagName(s)[0],
-			t = window.twttr || {};
-			if (d.getElementById(id)) return t;
-			js = d.createElement(s);
-			js.id = id;
-			js.src = "https://platform.twitter.com/widgets.js";
-			fjs.parentNode.insertBefore(js, fjs);
-
-			t._e = [];
-			t.ready = function(f) {
-			t._e.push(f);
-			};
-
-			return t;
-		}(document, "script", "twitter-wjs"));
-	</script>
 {% endblock %}
