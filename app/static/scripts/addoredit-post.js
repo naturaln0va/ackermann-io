@@ -1,5 +1,10 @@
+
 document.querySelector("textarea").addEventListener('keydown',function(e) {
-    if(e.keyCode === 9) { // tab was pressed
+    e = e||window.event // IE support
+    var c = e.keyCode
+    var ctrlDown = e.ctrlKey||e.metaKey // Mac support
+
+    if(c === 9) { // tab was pressed
         // get caret position/selection
         var start = this.selectionStart;
         var end = this.selectionEnd;
@@ -18,4 +23,17 @@ document.querySelector("textarea").addEventListener('keydown',function(e) {
         // prevent the focus lose
         e.preventDefault();
     }
-},false);
+    else if(c === 83 && ctrlDown) {
+        document.forms["post"].submit();
+
+        e.preventDefault();
+    }
+}, false);
+
+key('⌘+s, ctrl+s', function(event, handler){
+    console.log(handler.shortcut, handler.scope);
+
+    document.forms["post"].submit();
+
+    return false;
+});

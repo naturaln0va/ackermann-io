@@ -8,7 +8,7 @@
 {% block content %}
 	<article>
 		<h1>New Post</h1>
-		<form method="POST">
+		<form method="POST" name="post">
 			{{ form.hidden_tag() }}
 			<p>
 				Title:<br>{{ form.title }}<br>
@@ -22,5 +22,6 @@
 {% endblock %}
 
 {% block scripts %}
+	<script src="/static/scripts/keymaster.js"></script>
 	<script type="text/javascript" src="/static/scripts/addoredit-post.js"></script>
 {% endblock %}

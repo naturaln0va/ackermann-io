@@ -2,6 +2,7 @@
 import os
 from flask import request, session, render_template, redirect, flash
 from werkzeug.utils import secure_filename
+from datetime import datetime
 from app import app, db
 from config import UPLOAD_FOLDER
 from .forms import PostForm
@@ -72,7 +73,7 @@ def drafts():
 
 @app.route('/drafts/<slug>')
 def draft_view(slug):
-	draft = Post.query.filter_by(slug=slug).first()
+	draft = Post.query.filter_by(draft=True).filter_by(slug=slug).first()
 	return render_template('view_post.html', title=draft.title, post=draft, auth=has_auth())
 
 @app.route('/drafts/edit/<int:draft_id>', methods = ['GET', 'POST'])
@@ -110,6 +111,7 @@ def publish_draft(draft_id):
 		return redirect('/login')
 	post = Post.query.get(draft_id)
 	post.draft = False
+	post.timestamp = datetime.utcnow()
 	db.session.commit()
 	return redirect('/')
 
