@@ -15,6 +15,7 @@
 			    <li class="file">
 			    	<a href="/static/assets/{{ item['name'] }}">{{ item['name'] }}</a> - {{ item['size']|filesizeformat(item['size']) }}
 			    	<input type="submit" name="{{ item['name'] }}" value="Delete" onclick="buttonClicked(this)">
+			    	<input type="submit" name="{{ item['name'] }}" value="Copy" onclick="buttonClicked(this)">
 			    </li>
 			{% endfor %}
 		</ul>
