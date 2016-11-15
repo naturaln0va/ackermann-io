@@ -12,7 +12,7 @@
     		<title>ackermann.io</title>
     	{% endif %}
 
-		<script>
+		<script type="text/javascript">
 			(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
 			(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
 			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
@@ -25,11 +25,16 @@
 	<body>
 		<div class="topstrip"></div>
 		{% block menu %}
+			<header>
+				<a href="{{ url_for('index') }}"><h1>ryanackermann</h1></a>
+				<input id="search" type="search" name="search" placeholder="search…">
+			</header>
 			<div class="navigation">
 				<ul>
 					<li><a href="{{ url_for('index') }}">blog</a></li>
 					<li><a href="{{ url_for('portfolio') }}">portfolio</a></li>
 					<li><a href="https://twitter.com/naturaln0va">twitter</a></li>
+					<li><a href="https://github.com/naturaln0va">github</a></li>
 					{% if auth %}
 						<li><a href="{{ url_for('new_post') }}">new post</a></li>
 						<li><a href="{{ url_for('drafts') }}">drafts</a></li>
@@ -40,6 +45,7 @@
 			</div>
 		{% endblock %}
 		{% block content %}{% endblock %}
+		<script type="text/javascript" src="/static/scripts/base.js"></script>
 		{% block scripts %}{% endblock %}
 	</body>
 </html>

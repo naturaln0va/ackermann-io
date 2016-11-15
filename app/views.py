@@ -1,11 +1,11 @@
 
 import os
-from flask import request, session, render_template, redirect, flash
+from flask import request, session, render_template, redirect, url_for, flash
 from werkzeug.utils import secure_filename
 from datetime import datetime
 from app import app, db
 from config import UPLOAD_FOLDER
-from .forms import PostForm
+from .forms import PostForm, SearchForm
 from .models import Post
 
 # Exception handling
@@ -154,3 +154,8 @@ def delete_file(filename):
 		return redirect('/login')
 	os.remove(os.path.join(UPLOAD_FOLDER, filename))
 	return redirect('/cms')
+
+@app.route('/search/results/<query>')
+def search_results(query):
+	posts = Post.query.filter(Post.title.contains(query)).all()
+	return render_template('search.html', query=query, posts=posts, auth=has_auth())

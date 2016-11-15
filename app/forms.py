@@ -11,3 +11,6 @@ class PostForm(FlaskForm):
 	content = PageDownField('post contents', validators=[DataRequired()])
 	draft = BooleanField('Draft', default=True)
 	save = SubmitField('Save')
+
+class SearchForm(FlaskForm):
+    search = StringField('search', validators=[DataRequired()])
