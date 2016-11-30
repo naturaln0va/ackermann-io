@@ -21,14 +21,13 @@
 		<p><em>{{ post.description }}</em></p>
 		<hr>
 		<p>{{ post.content|markdown }}</p>
+		{% if not post.draft %}
+			<div id="share-button">
+				<a href="https://twitter.com/share" class="twitter-share-button" data-size="large" data-via="naturaln0va" data-show-count="false">Tweet</a><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+			</div>
+		{% endif %}
+		<footer>&copy; 2016 Ryan Ackermann</footer>
 	</article>
-	{% if not post.draft %}
-	
-		<div id="share-button">
-			<a href="https://twitter.com/share" class="twitter-share-button" data-size="large" data-via="naturaln0va" data-show-count="false">Tweet</a><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
-		</div>
-	{% endif %}
-	<footer>&copy; 2016 Ryan Ackermann</footer>
 {% endblock %}
 
 {% block scripts %}
