@@ -2,6 +2,12 @@
 /* Imports */ 
 @import url(https://fonts.googleapis.com/css?family=PT+Mono);
 
+/* Variables */
+:root {
+  --main-color: #ff5754;
+  --main-background: linear-gradient(45deg, #ff5754 0%,#b45769 100%);
+}
+
 /* Generic */
 ::-webkit-resizer {
   display: none;
@@ -21,18 +27,6 @@
   text-shadow: none;
   text-decoration: none;
   background: rgba(231, 231, 0, 0.45);
-}
-::-webkit-input-placeholder {
-  color: rgba(255,255,255,0.75);
-}
-:-moz-placeholder {
-  color: rgba(255,255,255,0.75);
-}
-::-moz-placeholder {
-  color: rgba(255,255,255,0.75);
-}
-:-ms-input-placeholder {  
-  color: rgba(255,255,255,0.75);
 }
 
 /* Body */
@@ -57,38 +51,41 @@ body article {
   max-width: 750px;
 }
 body article a {
-  color: #27b1b1;
+  color: var(--main-color);
 }
 
 /* Navigation */
 header {
   margin: 0;
-  padding: 0;
+  padding: 0 20px;
   height: 85px;
-  display:flex;
+  display: -webkit-flex;
+  display: flex;
   align-items: center;
-  background: #27b1b1;
+  background-color: var(--main-color);
+  background-image: var(--main-background);
 }
-header h1 {
+header a {
+  text-decoration: none;
+}
+header a h1 {
   margin: 0;
+  -webkit-align-self: flex-start;
+  align-self: flex-start;
   color: white;
-  padding-left: 20px;
-  display: inline-block;
 }
 
-#search {
+input#search {
   margin: 0;
-  width: 100%;
-  color: white;
+  padding: 5px;
+  margin-left: auto;
+  color: #333;
   border: none;
-  padding: 0 20px;
-  background: none;
-  appearance: none;
-  text-align: right;
-  font-size: 1.2em;
+  font-size: 15px;
+  border-radius: 3px;
   -moz-appearance: none;
-  display: inline-block;
   -webkit-appearance: none;
+  font-family: 'PT Mono', monospace, serif;
 }
 
 .navigation {
@@ -108,7 +105,7 @@ header h1 {
 }
 .navigation li a {
   text-decoration: none;
-  color: #27b1b1;
+  color: var(--main-color);
 }
 
 input:focus, select:focus, textarea:focus, button:focus {
@@ -122,7 +119,8 @@ input:focus, select:focus, textarea:focus, button:focus {
   left: 0px;
   height: 4px;
   width: 100%;
-  background: #27b1b1;
+  background-color: var(--main-color);
+  background-image: var(--main-background);
 }
 
 /* --- iOS --- */
@@ -132,8 +130,8 @@ input:focus, select:focus, textarea:focus, button:focus {
   input[type="text"],
   input[type="button"],
   input[type="submit"] {
-       -webkit-appearance: none;
-       border-radius: 7px;
+    -webkit-appearance: none;
+    border-radius: 7px;
   }
 
   body article {
