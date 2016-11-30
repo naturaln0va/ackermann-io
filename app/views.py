@@ -162,3 +162,7 @@ def delete_file(filename):
 def search_results(query):
 	posts = Post.query.filter(Post.title.contains(query)).all()
 	return render_template('search.html', query=query, posts=posts, auth=has_auth())
+
+@app.route('/grid')
+def grid():
+	return render_template('grid.html', auth=has_auth())
