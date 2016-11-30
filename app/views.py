@@ -143,6 +143,9 @@ def cms():
 		file.save(os.path.join(UPLOAD_FOLDER, filename))
 		return redirect('/cms')
 	else:
+		if not os.path.exists(UPLOAD_FOLDER):
+			os.makedirs(UPLOAD_FOLDER)
+
 		dicts = []
 		for filename in os.listdir(UPLOAD_FOLDER):
 			dicts.append({'name': filename, 'size': os.path.getsize(os.path.join(UPLOAD_FOLDER, filename))})

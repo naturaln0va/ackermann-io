@@ -46,7 +46,7 @@ input[type=text]:focus {
 input[type=button], input[type=submit] {
 	-webkit-transition: background-color 0.4s ease-in-out;
     transition: background-color 0.4s ease-in-out;
-    background-color: #27b1b1;
+    background-color: var(--main-color);
     border: none;
     border-radius: 3px;
     color: white;
@@ -58,5 +58,5 @@ input[type=button], input[type=submit] {
 }
 
 input[type=button], input[type=submit]:hover {
-	background-color: #23a1a1;
+	background-color: var(--main-hover-color);
 }
