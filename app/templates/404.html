@@ -1,8 +1,23 @@
-<!-- extend base layout -->
+
 {% extends "base.html" %}
+
+{% block stylesheet %}
+	<link rel="stylesheet" type="text/css" href="/static/stylesheets/404.css">
+{% endblock %}
 
 {% block content %}
 	<article>
-		<h1>Not Found 👎</h1>
+		<h2>Nothing Found</h2>
+		<p>Send me a picture of how this makes you feel?</p>
+		<canvas width="500" height="375" id="drawing">
+	   		🚫 Your browser doesn't support canvas, oh well.
+	  	</canvas>
+	  	<input id="clear" type="submit" value="Clear">
+		<input id="send" type="submit" value="Send">
 	</article>
+{% endblock %}
+
+{% block scripts %}
+	<script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha256-/SIrNqv8h6QGKDuNoLGA4iret+kyesCkHGzVUUV0shc=" crossorigin="anonymous"></script>
+	<script type="text/javascript" src="/static/scripts/draw.js"></script>
 {% endblock %}
