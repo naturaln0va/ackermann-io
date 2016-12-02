@@ -6,7 +6,7 @@
 :root {
   --main-color: #ff5754;
   --main-hover-color: #B45769;
-  --main-background: linear-gradient(45deg, #ff5754 0%, #b45769 100%);
+  --main-background: linear-gradient(90deg, #ff5754 0%, #b45769 100%);
 }
 
 /* Generic */

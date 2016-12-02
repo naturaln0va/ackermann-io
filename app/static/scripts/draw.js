@@ -1,20 +1,30 @@
 
 $(document).ready(function() {
-    var canvas = document.getElementById('drawing');
+
+    var viewportWidth = window.innerWidth < 750 ? window.innerWidth  / 4 * 3 : window.innerWidth / 2;
+    var canvas = document.createElement('canvas');
     var context = canvas.getContext('2d');
+    var isDrawing, points = [ ];
+
+    canvas.width = viewportWidth;
+    canvas.height = window.innerWidth < 750 ? viewportWidth * 4 / 3 : viewportWidth * 3 / 4;
 
     context.lineWidth = 10;
-    context.strokeStyle = '#E51415';
+    context.strokeStyle = '#ff5754';
     context.lineJoin = context.lineCap = 'round';
 
-    var isDrawing, points = [ ];
+    document.body.appendChild(canvas);
 
     $('#clear').click(function() {
         clearCanvas();
     });
 
-    $('#send').click(function() {
+    $('#save').click(function(){
         saveDrawing();
+    });
+
+    $('#send').click(function() {
+        alert('Sent mail!\n\nJust kidding.');
     });
 
     function saveDrawing() {
@@ -53,6 +63,35 @@ $(document).ready(function() {
         points.length = 0;
         context.clearRect(0, 0, context.canvas.width, context.canvas.height);
     }
+
+    canvas.ontouchstart = function(e) {
+        if(e.touches) {
+            if (e.touches.length == 1) {
+                isDrawing = true;
+                var touch = e.touches[0];
+                touchX=touch.pageX-touch.target.offsetLeft;
+                touchY=touch.pageY-touch.target.offsetTop;
+                points.push({ x: touchX, y: touchY });
+                drawCanvas();
+            }
+        }
+        e.preventDefault();
+    };
+
+    canvas.ontouchmove = function(e) {
+        if (!isDrawing) return;
+        if(e.touches) {
+            if (e.touches.length == 1) {
+                isDrawing = true;
+                var touch = e.touches[0];
+                touchX=touch.pageX-touch.target.offsetLeft;
+                touchY=touch.pageY-touch.target.offsetTop;
+                points.push({ x: touchX, y: touchY });
+                drawCanvas();
+            }
+        }
+        e.preventDefault();        
+    };
 
     canvas.onmousedown = function(e) {
         isDrawing = true;
