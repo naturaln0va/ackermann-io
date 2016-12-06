@@ -1,9 +1,10 @@
 
 import os
 from flask import request, session, render_template, redirect, url_for, flash
+from flask_mail import Message
 from werkzeug.utils import secure_filename
 from datetime import datetime
-from app import app, db
+from app import app, db, mail
 from config import UPLOAD_FOLDER
 from .forms import PostForm, SearchForm
 from .models import Post
@@ -145,7 +146,6 @@ def cms():
 	else:
 		if not os.path.exists(UPLOAD_FOLDER):
 			os.makedirs(UPLOAD_FOLDER)
-
 		dicts = []
 		for filename in os.listdir(UPLOAD_FOLDER):
 			dicts.append({'name': filename, 'size': os.path.getsize(os.path.join(UPLOAD_FOLDER, filename))})
@@ -163,6 +163,19 @@ def search_results(query):
 	posts = Post.query.filter(Post.title.contains(query)).all()
 	return render_template('search.html', query=query, posts=posts, auth=has_auth())
 
-@app.route('/grid')
-def grid():
-	return render_template('grid.html', auth=has_auth())
+@app.route('/send_error')
+def send_error():
+	image_hash = request.args.get('image_hash')
+	url = request.args.get('url')
+	if len(image_hash) % 4:
+		image_hash += '=' * (4 - len(image_hash) % 4)
+	image_data = image_hash.decode('base64')
+	filename = 'tmp/image_to_send.png'
+	with open(filename, 'w') as f:
+		f.write(image_data)
+	with open(filename, 'r') as f:
+		msg = Message("There was a broken link on ackermann.io.", sender=("404 Service", "ryha26@gmail.com"), recipients=["support@ackermann.io"])
+		msg.body = 'The broken url "' + str(url) + '" should be fixed.'
+		msg.attach("error.png", "image/png", f.read())
+		mail.send(msg)
+	return redirect('/')

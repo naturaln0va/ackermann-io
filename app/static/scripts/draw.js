@@ -10,10 +10,12 @@ $(document).ready(function() {
     canvas.height = window.innerWidth < 750 ? viewportWidth * 4 / 3 : viewportWidth * 3 / 4;
 
     context.lineWidth = 10;
-    context.strokeStyle = '#ff5754';
+    context.strokeStyle = '#2E94B9';
     context.lineJoin = context.lineCap = 'round';
 
     document.body.appendChild(canvas);
+
+    // dom actions
 
     $('#clear').click(function() {
         clearCanvas();
@@ -24,12 +26,17 @@ $(document).ready(function() {
     });
 
     $('#send').click(function() {
-        alert('Sent mail!\n\nJust kidding.');
+        var dataURL = canvas.toDataURL("image/png");
+        var base64Hash = dataURL.split(",")[1];
+        var brokenURL = window.location.pathname;
+        window.location.href = '/send_error?image_hash=' + base64Hash + '&url=' + brokenURL;
     });
 
+    // helper functions
+
     function saveDrawing() {
-        var savedPNG = canvas.toDataURL("drawing.png");
-        window.open(savedPNG);
+        var dataURL = canvas.toDataURL("image/png");
+        window.open(dataURL);
     }
 
     function addPoint(x, y, dragging) {
@@ -64,6 +71,8 @@ $(document).ready(function() {
         context.clearRect(0, 0, context.canvas.width, context.canvas.height);
     }
 
+    // touch events
+
     canvas.ontouchstart = function(e) {
         if(e.touches) {
             if (e.touches.length == 1) {
@@ -92,6 +101,14 @@ $(document).ready(function() {
         }
         e.preventDefault();        
     };
+
+    canvas.ontouchend = function(e) {
+        isDrawing = false;
+        points.length = 0;
+        e.preventDefault();        
+    };
+
+    // mouse events
 
     canvas.onmousedown = function(e) {
         isDrawing = true;

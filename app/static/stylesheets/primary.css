@@ -4,9 +4,9 @@
 
 /* Variables */
 :root {
-  --main-color: #ff5754;
-  --main-hover-color: #B45769;
-  --main-background: linear-gradient(90deg, #ff5754 0%, #b45769 100%);
+  --main-color: #2E94B9;
+  --main-hover-color: #27b1b1;
+  --main-background: linear-gradient(90deg, #2E94B9 0%, #27b1b1 100%);
 }
 
 /* Generic */
