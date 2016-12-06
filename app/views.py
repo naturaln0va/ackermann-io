@@ -139,9 +139,9 @@ def cms():
 	if not has_auth():
 		return redirect('/login')
 	if request.method == 'POST':
-		file = request.files['file']
-		filename = secure_filename(file.filename)
-		file.save(os.path.join(UPLOAD_FOLDER, filename))
+		for file in request.files.getlist("file[]"):
+			filename = secure_filename(file.filename)
+			file.save(os.path.join(UPLOAD_FOLDER, filename))
 		return redirect('/cms')
 	else:
 		if not os.path.exists(UPLOAD_FOLDER):
