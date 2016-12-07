@@ -1,5 +1,6 @@
 
 import os
+from operator import itemgetter
 from flask import request, session, render_template, redirect, url_for, flash
 from flask_mail import Message
 from werkzeug.utils import secure_filename
@@ -149,7 +150,8 @@ def cms():
 		dicts = []
 		for filename in os.listdir(UPLOAD_FOLDER):
 			dicts.append({'name': filename, 'size': os.path.getsize(os.path.join(UPLOAD_FOLDER, filename))})
-		return render_template('cms.html', items=dicts, auth=has_auth())
+		sorted_items = sorted(dicts, key=itemgetter('name'))
+		return render_template('cms.html', items=sorted_items, auth=has_auth())
 
 @app.route('/cms/rm/<filename>')
 def delete_file(filename):
@@ -160,7 +162,7 @@ def delete_file(filename):
 
 @app.route('/search/results/<query>')
 def search_results(query):
-	posts = Post.query.filter(Post.title.contains(query)).all()
+	posts = Post.query.filter(Post.title.ilike('%'+query+'%')).all()
 	return render_template('search.html', query=query, posts=posts, auth=has_auth())
 
 @app.route('/send_error')
