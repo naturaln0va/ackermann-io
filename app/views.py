@@ -164,20 +164,3 @@ def delete_file(filename):
 def search_results(query):
 	posts = Post.query.filter(Post.title.ilike('%'+query+'%')).all()
 	return render_template('search.html', query=query, posts=posts, auth=has_auth())
-
-@app.route('/send_error')
-def send_error():
-	image_hash = request.args.get('image_hash')
-	url = request.args.get('url')
-	if len(image_hash) % 4:
-		image_hash += '=' * (4 - len(image_hash) % 4)
-	image_data = image_hash.decode('base64')
-	filename = 'tmp/image_to_send.png'
-	with open(filename, 'w') as f:
-		f.write(image_data)
-	with open(filename, 'r') as f:
-		msg = Message("There was a broken link on ackermann.io.", sender=("404 Service", "ryha26@gmail.com"), recipients=["support@ackermann.io"])
-		msg.body = 'The broken url "' + str(url) + '" should be fixed.'
-		msg.attach("error.png", "image/png", f.read())
-		mail.send(msg)
-	return redirect('/')

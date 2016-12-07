@@ -27,7 +27,7 @@ input[type=submit] {
 }
 
 #buttonContainer {
-  width: 50%;
+  width: 40%;
   padding: 8px;
   display: block;
   margin: 0 auto;
@@ -39,8 +39,5 @@ input[type=submit] {
   input[type=submit] {
     font-size: 0.75em;
     padding: 8px 18px;
-  }
-  #buttonContainer {
-    width: 80%;
   }
 }

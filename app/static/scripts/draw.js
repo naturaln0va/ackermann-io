@@ -25,13 +25,6 @@ $(document).ready(function() {
         saveDrawing();
     });
 
-    $('#send').click(function() {
-        var dataURL = canvas.toDataURL("image/png");
-        var base64Hash = dataURL.split(",")[1];
-        var brokenURL = window.location.pathname;
-        window.location.href = '/send_error?image_hash=' + base64Hash + '&url=' + brokenURL;
-    });
-
     // helper functions
 
     function saveDrawing() {
