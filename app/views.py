@@ -8,7 +8,7 @@ from datetime import datetime
 from app import app, db, mail
 from config import UPLOAD_FOLDER
 from .forms import PostForm, SearchForm
-from .models import Post
+from .models import Post, Category
 
 # Exception handling
 
@@ -32,6 +32,14 @@ def has_auth():
 def index():
 	posts = Post.query.order_by(Post.timestamp.desc()).filter_by(draft=False).all()
 	return render_template('index.html', posts=posts, auth=has_auth())
+
+@app.route('/categories')
+def categories():
+	dicts = []
+	for c in Category.query.order_by(Category.name).all():
+		if len(c.posts.filter_by(draft=False).all()) > 0:
+			dicts.append({'name': c.name, 'posts': c.posts})
+	return render_template('categories.html', dicts=dicts, auth=has_auth())
 
 @app.route('/posts/<slug>')
 def post_view(slug):
@@ -89,11 +97,20 @@ def draft_edit(draft_id):
 		form.description.data = draft.description
 		form.content.data = draft.content
 		form.draft.data = draft.draft
+		form.category.data = draft.category.name
+		form.date.data = draft.timestamp
+		form.slug.data = draft.slug
 	if form.validate_on_submit():
 		draft.title = form.title.data
 		draft.description = form.description.data
 		draft.content = form.content.data
 		draft.draft = form.draft.data
+		draft.timestamp = form.date.data
+		draft.slug = form.slug.data
+		# if there is an exsisting category use it
+		category = Category.query.filter_by(name=form.category.data).first()
+		if not category:
+			category = Category(form.category.data)
 		db.session.commit()
 		return redirect('/drafts')
 	return render_template('new_post.html', form=form, auth=has_auth())
@@ -117,7 +134,7 @@ def publish_draft(draft_id):
 	db.session.commit()
 	return redirect('/')
 
-@app.route('/new_post', methods = ['GET', 'POST'])
+@app.route('/posts/create', methods = ['GET', 'POST'])
 def new_post():
 	if not has_auth():
 		return redirect('/login')
@@ -127,12 +144,20 @@ def new_post():
 		description = form.description.data
 		content = form.content.data
 		draft = form.draft.data
-
-		post = Post(title, description, content)
+		date = form.date.data
+		# if there is an exsisting category use it
+		category = Category.query.filter_by(name=form.category.data).first()
+		if not category:
+			category = Category(form.category.data)
+		post = Post(title, description, content, category)
+		post.draft = draft
+		post.timestamp = date
 		db.session.add(post)
 		db.session.commit()
-
 		return redirect('/drafts')
+	else:
+		print 'Errors in the form:'
+		print form.errors.items()
 	return render_template('new_post.html', form=form, auth=has_auth())
 
 @app.route('/cms', methods=['GET', 'POST'])

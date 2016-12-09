@@ -12,7 +12,12 @@
 			{{ form.hidden_tag() }}
 			<p>
 				Title:<br>{{ form.title }}<br>
-				Description:<br>{{ form.description }}
+				Description:<br>{{ form.description }}<br>
+				Category:<br>{{ form.category }}
+				Date:<br>{{ form.date }}
+				{% if form.slug.data %}
+					Slug:<br>{{ form.slug }}
+				{% endif %}
 			</p>
 			<p>Content:{{ form.content }}</p>
 			<p>{{ form.draft }} Draft?</p>

@@ -128,17 +128,17 @@ input:focus, select:focus, textarea:focus, button:focus {
   background-image: var(--main-background);
 }
 
-/* --- iOS --- */
-
-/* Portrait */
-@media (max-width: 750px) and (min-width: 320px) {
+/* --- iOS | Portrait --- */
+@media only screen and (min-device-width: 320px) and (max-device-width: 667px) {
   input[type="text"],
   input[type="button"],
   input[type="submit"] {
     -webkit-appearance: none;
     border-radius: 7px;
   }
+}
 
+@media (max-width: 750px) and (min-width: 320px) {
   body article {
     width: 90%;
   }

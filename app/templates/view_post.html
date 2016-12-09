@@ -19,6 +19,7 @@
 		<h1 id="title">{{ post.title }}</h1>
 		<p id="timestamp">{{ post.timestamp|prettytime }}</p>
 		<p><em>{{ post.description }}</em></p>
+		<p><span id="category">{{ post.category.name }}</span></p>
 		<hr>
 		<p>{{ post.content|markdown }}</p>
 		{% if not post.draft %}
