@@ -7,10 +7,9 @@
 
 {% block content %}
 	<article>
-		<h1>Categories</h1>
 		<ul>
 			{% for dict in dicts %}
-				<li><h2>{{ dict['name'] }}</h2></li>
+				<li><h3>{{ dict['name'] }}</h3></li>
 				<ul>
 					{% for post in dict['posts'] %}
 						<li class="items"><span id="date">{{ post.timestamp|prettytime }}:</span> <a href="/posts/{{ post.slug }}">{{ post.title }}</a></li>

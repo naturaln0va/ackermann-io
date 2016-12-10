@@ -1,5 +1,6 @@
 
 import os
+from functools import wraps
 from operator import itemgetter
 from flask import request, session, render_template, redirect, url_for, flash
 from flask_mail import Message
@@ -26,12 +27,25 @@ def internal_error(error):
 def has_auth():
 	return 'username' in session
 
+def requires_auth(f):
+	@wraps(f)
+	def decorated(*args, **kwargs):
+		if not has_auth():
+			return redirect('/login')
+		return f(*args, **kwargs)
+	return decorated
+
 # Routing
 
 @app.route('/')
 def index():
 	posts = Post.query.order_by(Post.timestamp.desc()).filter_by(draft=False).all()
 	return render_template('index.html', posts=posts, auth=has_auth())
+
+@app.route('/posts/<slug>')
+def post_view(slug):
+	post = Post.query.filter_by(slug=slug).first()
+	return render_template('view_post.html', title=post.title, post=post, auth=has_auth())
 
 @app.route('/categories')
 def categories():
@@ -41,24 +55,10 @@ def categories():
 			dicts.append({'name': c.name, 'posts': c.posts})
 	return render_template('categories.html', dicts=dicts, auth=has_auth())
 
-@app.route('/posts/<slug>')
-def post_view(slug):
-	post = Post.query.filter_by(slug=slug).first()
-	return render_template('view_post.html', title=post.title, post=post, auth=has_auth())
-
-@app.route('/login', methods=['GET', 'POST'])
-def login():
-	if has_auth():
-		return redirect('/')
-	if request.method == 'POST' and request.form['password'] == 'EQjmLRVwDX%;z&Ek94N(Fa7C6MGinbgmpg':
-		session['username'] = 'naturaln0va'
-		return redirect('/')
-	return render_template('login.html', auth=has_auth())
-
-@app.route('/logout')
-def logout():
-	session.pop('username', None)
-	return redirect('/')
+@app.route('/search/results/<query>')
+def search_results(query):
+	posts = Post.query.filter(Post.title.ilike('%'+query+'%')).all()
+	return render_template('search.html', query=query, posts=posts, auth=has_auth())
 
 @app.route('/apps')
 @app.route('/about')
@@ -74,10 +74,23 @@ def privacy():
 def quakes():
 	return render_template('quakes.html', title='Quakes', auth=has_auth())
 
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+	if has_auth():
+		return redirect('/')
+	if request.method == 'POST' and request.form['password'] == 'EQjmLRVwDX%;z&Ek94N(Fa7C6MGinbgmpg':
+		session['username'] = 'naturaln0va'
+		return redirect('/')
+	return render_template('login.html', auth=has_auth())
+
+@app.route('/logout')
+def logout():
+	session.pop('username', None)
+	return redirect('/')
+
 @app.route('/drafts')
+@requires_auth
 def drafts():
-	if not has_auth():
-		return redirect('/login')
 	drafts = Post.query.order_by(Post.timestamp.desc()).filter_by(draft=True).all()
 	return render_template('drafts.html', drafts=drafts, auth=has_auth())
 
@@ -87,9 +100,8 @@ def draft_view(slug):
 	return render_template('view_post.html', title=draft.title, post=draft, auth=has_auth())
 
 @app.route('/drafts/edit/<int:draft_id>', methods = ['GET', 'POST'])
+@requires_auth
 def draft_edit(draft_id):
-	if not has_auth():
-		return redirect('/login')
 	draft = Post.query.get(draft_id)
 	form = PostForm()
 	if request.method == 'GET':
@@ -116,18 +128,16 @@ def draft_edit(draft_id):
 	return render_template('new_post.html', form=form, auth=has_auth())
 
 @app.route('/drafts/rm/<int:draft_id>')
+@requires_auth
 def delete_draft(draft_id):
-	if not has_auth():
-		return redirect('/login')
 	draft = Post.query.get(draft_id)
 	db.session.delete(draft)
 	db.session.commit()
 	return redirect('/drafts')
 
 @app.route('/drafts/publish/<int:draft_id>')
+@requires_auth
 def publish_draft(draft_id):
-	if not has_auth():
-		return redirect('/login')
 	post = Post.query.get(draft_id)
 	post.draft = False
 	post.timestamp = datetime.utcnow()
@@ -135,9 +145,8 @@ def publish_draft(draft_id):
 	return redirect('/')
 
 @app.route('/posts/create', methods = ['GET', 'POST'])
+@requires_auth
 def new_post():
-	if not has_auth():
-		return redirect('/login')
 	form = PostForm()
 	if form.validate_on_submit():
 		title = form.title.data
@@ -161,9 +170,8 @@ def new_post():
 	return render_template('new_post.html', form=form, auth=has_auth())
 
 @app.route('/cms', methods=['GET', 'POST'])
+@requires_auth
 def cms():
-	if not has_auth():
-		return redirect('/login')
 	if request.method == 'POST':
 		for file in request.files.getlist("file[]"):
 			filename = secure_filename(file.filename)
@@ -179,13 +187,7 @@ def cms():
 		return render_template('cms.html', items=sorted_items, auth=has_auth())
 
 @app.route('/cms/rm/<filename>')
+@requires_auth
 def delete_file(filename):
-	if not has_auth():
-		return redirect('/login')
 	os.remove(os.path.join(UPLOAD_FOLDER, filename))
 	return redirect('/cms')
-
-@app.route('/search/results/<query>')
-def search_results(query):
-	posts = Post.query.filter(Post.title.ilike('%'+query+'%')).all()
-	return render_template('search.html', query=query, posts=posts, auth=has_auth())
