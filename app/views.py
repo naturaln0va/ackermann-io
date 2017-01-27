@@ -57,7 +57,7 @@ def categories():
 
 @app.route('/search/results/<query>')
 def search_results(query):
-	posts = Post.query.filter(Post.title.ilike('%'+query+'%')).all()
+	posts = Post.query.filter(Post.title.ilike('%'+query+'%')).order_by(Post.timestamp.desc()).filter_by(draft=False).all()
 	return render_template('search.html', query=query, posts=posts, auth=has_auth())
 
 @app.route('/apps')
@@ -65,6 +65,10 @@ def search_results(query):
 @app.route('/portfolio')
 def portfolio():
 	return render_template('portfolio.html', auth=has_auth())
+    
+@app.route('/links')
+def links():
+    return render_template('links.html', auth=has_auth())
 
 @app.route('/privacy')
 def privacy():

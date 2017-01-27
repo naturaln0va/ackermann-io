@@ -1,0 +1,20 @@
+
+ul.list {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+ul.list li {
+	margin: 8px;
+	padding: 8px;
+	background: var(--main-color);
+	border-radius: 5px;
+	display: inline-block;
+	color: white;
+}
+
+ul a {
+	color: white;
+	text-decoration: none;
+}
