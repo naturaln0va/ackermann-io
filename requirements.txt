@@ -14,7 +14,7 @@ Jinja2==2.8
 Markdown==2.6.7
 MarkupSafe==0.23
 pbr==1.10.0
-psycopg2==2.5.4
+
 python-slugify==1.2.1
 six==1.10.0
 SQLAlchemy==1.1.1
@@ -25,3 +25,4 @@ Unidecode==0.4.19
 Werkzeug==0.11.11
 Whoosh==2.7.4
 WTForms==2.1
+pyOpenSSL==16.2.0
