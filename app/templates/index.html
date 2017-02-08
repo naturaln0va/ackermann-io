@@ -9,17 +9,19 @@
 	<article>
 		{% if posts|length == 0 %}
 			<h3>No recent posts.</h3>
+		{% else %}
+			<h1>Recent posts</h1>
+			{% for post in posts %}
+				<div class="post">
+					<div id="titledate">
+						<a href="/posts/{{ post.slug }}"><h2 id="title">{{ post.title }}</h2></a>
+						<div id="date">{{ post.timestamp|prettytime }}</div>
+					</div>
+					<div id="preview">
+						{{ post.description }}
+					</div>
+				</div>
+			{% endfor %}
 		{% endif %}
-		{% for post in posts %}
-			<div class="post">
-				<div id="titledate">
-					<a href="/posts/{{ post.slug }}"><h2 id="title">{{ post.title }}</h2></a>
-					<div id="date">{{ post.timestamp|prettytime }}</div>
-				</div>
-				<div id="preview">
-					{{ post.description }}
-				</div>
-			</div>
-		{% endfor %}
 	</article>
 {% endblock %}

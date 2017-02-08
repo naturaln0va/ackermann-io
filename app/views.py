@@ -5,7 +5,7 @@ from operator import itemgetter
 from flask import request, session, render_template, redirect, url_for, flash
 from flask_mail import Message
 from werkzeug.utils import secure_filename
-from datetime import datetime
+from datetime import datetime, date
 from app import app, db, mail
 from config import UPLOAD_FOLDER
 from .forms import PostForm, SearchForm
@@ -61,14 +61,16 @@ def search_results(query):
 	return render_template('search.html', query=query, posts=posts, auth=has_auth())
 
 @app.route('/apps')
-@app.route('/about')
 @app.route('/portfolio')
 def portfolio():
 	return render_template('portfolio.html', auth=has_auth(), current='portfolio')
 
 @app.route('/links')
-def links():
-    return render_template('links.html', auth=has_auth(), current='links')
+@app.route('/about')
+def about():
+    today = date.today()
+    my_age = today.year - 1994 - ((today.month, today.day) < (11, 26))
+    return render_template('about.html', auth=has_auth(), current='about', age=my_age)
 
 @app.route('/privacy')
 def privacy():

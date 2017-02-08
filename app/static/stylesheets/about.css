@@ -1,0 +1,43 @@
+
+ul.list {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	margin-bottom: 24px;
+}
+
+ul.list li {
+	margin: 8px;
+	padding: 8px;
+	background: var(--main-color);
+	border-radius: 5px;
+	display: inline-block;
+	color: white;
+}
+
+ul a {
+	color: white;
+	text-decoration: none;
+}
+
+img {
+	width: 150px;
+	float: right;
+	margin: 10px;
+	margin-right: 0px;
+	border-radius: 50%;
+	display: inline-block;
+	border: 5px solid var(--main-color);
+}
+
+/* --- iOS --- */
+
+/* Portrait */
+@media (max-width: 750px) and (min-width: 320px) {
+
+	img {
+		display: block;
+		margin: 0 auto;
+	}
+
+}

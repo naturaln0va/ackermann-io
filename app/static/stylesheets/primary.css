@@ -110,7 +110,7 @@ input#search {
   text-align: left;
 }
 .navigation li {
-  padding: 8px 15px;
+  padding: 4px 10px;
   display: inline-block;
   list-style: none;
 }
@@ -127,6 +127,8 @@ input#search {
 .navigation li b {
   padding: 4px;
   color: var(--main-color);
+  font-weight: bolder;
+  border-bottom: 2px solid var(--main-color);
 }
 
 input:focus, select:focus, textarea:focus, button:focus {
@@ -159,7 +161,7 @@ input:focus, select:focus, textarea:focus, button:focus {
     width: 90%;
   }
 
-  header a h1 {
+  header h1 {
     display: none;
   }
 

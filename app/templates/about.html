@@ -1,0 +1,26 @@
+
+{% extends "base.html" %}
+
+{% block stylesheet %}
+	<link rel="stylesheet" type="text/css" href="/static/stylesheets/about.css">
+{% endblock%}
+
+{% block content %}
+	<article>
+		<h1>About</h1>
+		<img src="/static/assets/small_portrait.png" alt="Profile Picture"/>
+		<p>Hello, I'm Ryan Ackermann. I'm {{ age }} years old. I'm married to my bestfriend and we have a <a href="https://www.instagram.com/p/BDVj0dTrGg9/?taken-by=naturaln0va">husky</a> who keeps us busy!</p>
+		<p>I make apps for <a href="http://www.apple.com"> devices</a>. Currently I work on the <a href="https://www.bible.com/app">YouVersion Bible App</a> and you can read about my first year there <a href="/posts/one-year-youversion">here</a>.</p>
+		<p>Want to get to know me more? Send me an <a href="mailto:ryan@ackermann.io">email</a>, or checkout other places on the net that I do stuff below.</p>
+		<ul class="list">
+			<a href="https://github.com/naturaln0va"><li>Code on <strong>GitHub</strong></li></a>
+			<a href="https://twitter.com/naturaln0va"><li>Thoughts on <strong>Twitter</strong></li></a>
+			<a href="https://dribbble.com/naturaln0va"><li>Scribbles on <strong>Dribbble</strong></li></a>
+			<a href="https://open.spotify.com/user/naturaln0va"><li>Noises on <strong>Spotify</strong></li></a>
+			<a href="https://www.instagram.com/naturaln0va/"><li>Pictures on <strong>Instagram</strong></li></a>
+			<a href="https://thenounproject.com/ryanackermann"><li>Icons on <strong>NounProject</strong></li></a>
+			<a href="http://stackoverflow.com/users/5322726/naturaln0va"><li>Answers on <strong>StackOverflow</strong></li></a>
+			<a href="https://www.raywenderlich.com/u/naturaln0va?section=posts"><li>Writing on <strong>RayWenderlich</strong></li></a>
+		</ul>
+	</article>
+{% endblock %}
