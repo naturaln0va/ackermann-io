@@ -38,19 +38,58 @@
 		<div class="topstrip"></div>
 		{% block menu %}
 			<header>
-				<a href="{{ url_for('index') }}"><h1>ryanackermann</h1></a>
+				{% if current == 'index' %}
+					<b><h1>ryanackermann</h1></b>
+				{% else %}
+					<a href="{{ url_for('index') }}"><h1>ryanackermann</h1></a>
+				{% endif %}
 				<input id="search" type="search" name="search" placeholder="search for something">
 			</header>
 			<div class="navigation">
 				<ul>
-					<li><a href="{{ url_for('index') }}">blog</a></li>
-					<li><a href="{{ url_for('categories') }}">categories</a></li>
-					<li><a href="{{ url_for('portfolio') }}">portfolio</a></li>
-					<li><a href="{{ url_for('links') }}">links</a></li>
+					{% if current == 'index' %}
+						<li><b>home</b></li>
+					{% else %}
+						<li><a href="{{ url_for('index') }}">home</a></li>
+					{% endif %}
+
+					{% if current == 'categories' %}
+						<li><b>categories</b></li>
+					{% else %}
+						<li><a href="{{ url_for('categories') }}">categories</a></li>
+					{% endif %}
+
+					{% if current == 'portfolio' %}
+						<li><b>portfolio</b></li>
+					{% else %}
+						<li><a href="{{ url_for('portfolio') }}">portfolio</a></li>
+					{% endif %}
+
+					{% if current == 'links' %}
+						<li><b>links</b></li>
+					{% else %}
+						<li><a href="{{ url_for('links') }}">links</a></li>
+					{% endif %}
+
 					{% if auth %}
-						<li><a href="{{ url_for('new_post') }}">new post</a></li>
-						<li><a href="{{ url_for('drafts') }}">drafts</a></li>
-						<li><a href="{{ url_for('cms') }}">media</a></li>
+						{% if current == 'new_post' %}
+							<li><b>new post</b></li>
+						{% else %}
+							<li><a href="{{ url_for('new_post') }}">new post</a></li>
+						{% endif %}
+
+						{% if current == 'drafts' %}
+							<li><b>drafts</b></li>
+						{% else %}
+							<li><a href="{{ url_for('drafts') }}">drafts</a></li>
+						{% endif %}
+
+						{% if current == 'cms' %}
+							<li><b>media</b></li>
+						{% else %}
+							<li><a href="{{ url_for('cms') }}">media</a></li>
+						{% endif %}
+
 						<li><a href="{{ url_for('logout') }}">logout</a></li>
 					{% endif %}
 				</ul>

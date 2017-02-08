@@ -7,7 +7,7 @@ UPLOAD_FOLDER = 'app/static/assets'
 ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
 
 # secret settings
-SECRET_KEY = 'k?yhGAcb9bFvtH99NYAz[fR87EQFN^6*%q6v'
+SECRET_KEY = 'k?yhGAcb9bFvtH99NYAz[fR87EQFN^6*#q6v'
 
 # mail settings
 MAIL_SERVER = 'smtp.gmail.com'

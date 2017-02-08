@@ -1,5 +1,5 @@
 
-/* Imports */ 
+/* Imports */
 @import url(https://fonts.googleapis.com/css?family=PT+Mono);
 
 /* Variables */
@@ -69,11 +69,17 @@ header {
 header a {
   text-decoration: none;
 }
-header a h1 {
+header h1 {
   margin: 0;
   -webkit-align-self: flex-start;
   align-self: flex-start;
   color: white;
+}
+header a h1:hover {
+  padding: 5px;
+  border-radius: 5px;
+  background-color: white;
+  color: var(--main-color);
 }
 
 input#search {
@@ -104,12 +110,22 @@ input#search {
   text-align: left;
 }
 .navigation li {
+  padding: 8px 15px;
   display: inline-block;
   list-style: none;
-  padding: 8px 15px;
 }
 .navigation li a {
+  padding: 4px;
   text-decoration: none;
+  color: var(--main-color);
+}
+.navigation li a:hover {
+  color: white;
+  border-radius: 3px;
+  background-color: var(--main-color);
+}
+.navigation li b {
+  padding: 4px;
   color: var(--main-color);
 }
 

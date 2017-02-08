@@ -40,12 +40,12 @@ def requires_auth(f):
 @app.route('/')
 def index():
 	posts = Post.query.order_by(Post.timestamp.desc()).filter_by(draft=False).all()
-	return render_template('index.html', posts=posts, auth=has_auth())
+	return render_template('index.html', posts=posts, auth=has_auth(), current='index')
 
 @app.route('/posts/<slug>')
 def post_view(slug):
 	post = Post.query.filter_by(slug=slug).first()
-	return render_template('view_post.html', title=post.title, post=post, auth=has_auth())
+	return render_template('view_post.html', title=post.title, post=post, auth=has_auth(), current='home')
 
 @app.route('/categories')
 def categories():
@@ -53,7 +53,7 @@ def categories():
 	for c in Category.query.order_by(Category.name).all():
 		if len(c.posts.filter_by(draft=False).all()) > 0:
 			dicts.append({'name': c.name, 'posts': c.posts})
-	return render_template('categories.html', dicts=dicts, auth=has_auth())
+	return render_template('categories.html', dicts=dicts, auth=has_auth(), current='categories')
 
 @app.route('/search/results/<query>')
 def search_results(query):
@@ -64,11 +64,11 @@ def search_results(query):
 @app.route('/about')
 @app.route('/portfolio')
 def portfolio():
-	return render_template('portfolio.html', auth=has_auth())
-    
+	return render_template('portfolio.html', auth=has_auth(), current='portfolio')
+
 @app.route('/links')
 def links():
-    return render_template('links.html', auth=has_auth())
+    return render_template('links.html', auth=has_auth(), current='links')
 
 @app.route('/privacy')
 def privacy():
@@ -96,12 +96,12 @@ def logout():
 @requires_auth
 def drafts():
 	drafts = Post.query.order_by(Post.timestamp.desc()).filter_by(draft=True).all()
-	return render_template('drafts.html', drafts=drafts, auth=has_auth())
+	return render_template('drafts.html', drafts=drafts, auth=has_auth(), current='drafts')
 
 @app.route('/drafts/<slug>')
 def draft_view(slug):
 	draft = Post.query.filter_by(draft=True).filter_by(slug=slug).first()
-	return render_template('view_post.html', title=draft.title, post=draft, auth=has_auth())
+	return render_template('view_post.html', title=draft.title, post=draft, auth=has_auth(), current='drafts')
 
 @app.route('/drafts/edit/<int:draft_id>', methods = ['GET', 'POST'])
 @requires_auth
@@ -171,7 +171,7 @@ def new_post():
 	else:
 		print 'Errors in the form:'
 		print form.errors.items()
-	return render_template('new_post.html', form=form, auth=has_auth())
+	return render_template('new_post.html', form=form, auth=has_auth(), current='new_post')
 
 @app.route('/cms', methods=['GET', 'POST'])
 @requires_auth
@@ -188,7 +188,7 @@ def cms():
 		for filename in os.listdir(UPLOAD_FOLDER):
 			dicts.append({'name': filename, 'size': os.path.getsize(os.path.join(UPLOAD_FOLDER, filename))})
 		sorted_items = sorted(dicts, key=itemgetter('name'))
-		return render_template('cms.html', items=sorted_items, auth=has_auth())
+		return render_template('cms.html', items=sorted_items, auth=has_auth(), current='cms')
 
 @app.route('/cms/rm/<filename>')
 @requires_auth
