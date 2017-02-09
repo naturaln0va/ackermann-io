@@ -4,8 +4,8 @@
 
 /* Variables */
 :root {
-  --main-color: #2E94B9;
-  --main-hover-color: #27b1b1;
+  --main-color: #007AFF;
+  --main-hover-color: #0065D3;
   --main-background: linear-gradient(90deg, #2E94B9 0%, #27b1b1 100%);
 }
 
@@ -64,7 +64,6 @@ header {
   display: flex;
   align-items: center;
   background-color: var(--main-color);
-  background-image: var(--main-background);
 }
 header a {
   text-decoration: none;
@@ -143,7 +142,6 @@ input:focus, select:focus, textarea:focus, button:focus {
   height: 4px;
   width: 100%;
   background-color: var(--main-color);
-  background-image: var(--main-background);
 }
 
 /* --- iOS | Portrait --- */
