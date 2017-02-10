@@ -103,7 +103,7 @@ def drafts():
 @app.route('/drafts/<slug>')
 def draft_view(slug):
 	draft = Post.query.filter_by(draft=True).filter_by(slug=slug).first()
-	return render_template('view_post.html', title=draft.title, post=draft, auth=has_auth(), current='drafts')
+	return render_template('view_post.html', title=draft.title, post=draft, auth=has_auth())
 
 @app.route('/drafts/edit/<int:draft_id>', methods = ['GET', 'POST'])
 @requires_auth

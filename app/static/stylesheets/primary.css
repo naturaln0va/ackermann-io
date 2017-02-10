@@ -5,6 +5,7 @@
 /* Variables */
 :root {
   --main-color: #2E93B9;
+  --border-color: #CCC;
   --main-hover-color: #27b1b1;
   --main-background: linear-gradient(90deg, #2E94B9 0%, #27b1b1 100%);
 }
@@ -63,22 +64,23 @@ header {
   display: -webkit-flex;
   display: flex;
   align-items: center;
-  background-color: var(--main-color);
+  background-color: white;
+  border-bottom: 2px solid var(--main-color);
 }
 header a {
   text-decoration: none;
 }
 header h1 {
   margin: 0;
+  padding: 5px;
   -webkit-align-self: flex-start;
   align-self: flex-start;
-  color: white;
+  color: var(--main-color);
 }
 header a h1:hover {
-  padding: 5px;
   border-radius: 5px;
-  background-color: white;
-  color: var(--main-color);
+  color: white;
+  background-color: var(--main-color);
 }
 
 input#search {
@@ -86,12 +88,13 @@ input#search {
   padding: 5px;
   margin-left: auto;
   color: #333;
-  border: none;
+  border: 2px solid var(--border-color);
+  border-radius: 9px;
   font-size: 15px;
   border-radius: 3px;
   -moz-appearance: none;
   -webkit-appearance: none;
-  font-family: 'PT Mono', monospace, serif;
+  font-family: inherit;
   -webkit-transition: all 0.5s ease;
   -moz-transition: all 0.5s ease;
   -o-transition: all 0.5s ease;
@@ -100,8 +103,7 @@ input#search {
 
 .navigation {
   margin: 0;
-  padding: 10px;
-  padding-bottom: 0;
+  padding: 0 10px;
 }
 .navigation ul {
   margin: 0;
@@ -139,7 +141,7 @@ input:focus, select:focus, textarea:focus, button:focus {
   position: fixed;
   top: 0px;
   left: 0px;
-  height: 4px;
+  height: 2px;
   width: 100%;
   background-color: var(--main-color);
 }
