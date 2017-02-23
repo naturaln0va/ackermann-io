@@ -43,7 +43,6 @@
 				{% else %}
 					<a href="{{ url_for('index') }}"><h1>ryanackermann</h1></a>
 				{% endif %}
-				<input id="search" type="search" name="search" placeholder="search for something">
 			</header>
 			<div class="navigation">
 				<ul>
@@ -54,9 +53,9 @@
 					{% endif %}
 
 					{% if current == 'categories' %}
-						<li><b>categories</b></li>
+						<li><b>articles</b></li>
 					{% else %}
-						<li><a href="{{ url_for('categories') }}">categories</a></li>
+						<li><a href="{{ url_for('categories') }}">articles</a></li>
 					{% endif %}
 
 					{% if current == 'portfolio' %}

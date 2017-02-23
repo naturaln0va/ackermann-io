@@ -7,7 +7,7 @@
 
 {% block content %}
 	<article>
-		<h1>Categories</h1>
+		<input id="search" type="search" name="search" placeholder="search for something">
 		<ul>
 			{% for dict in dicts %}
 				<li><h3>{{ dict['name'] }}</h3></li>

@@ -4,9 +4,9 @@
 
 /* Variables */
 :root {
-  --main-color: #2E93B9;
   --border-color: #CCC;
-  --main-hover-color: #27b1b1;
+  --main-color: #E51415;
+  --main-hover-color: #C4191C;
   --main-background: linear-gradient(90deg, #2E94B9 0%, #27b1b1 100%);
 }
 
@@ -59,13 +59,9 @@ body article a {
 /* Navigation */
 header {
   margin: 0;
-  padding: 0 20px;
-  height: 85px;
-  display: -webkit-flex;
-  display: flex;
-  align-items: center;
+  padding: 30px 20px;
   background-color: white;
-  border-bottom: 2px solid var(--main-color);
+  /*border-bottom: 2px solid var(--main-color);*/
 }
 header a {
   text-decoration: none;
@@ -73,8 +69,7 @@ header a {
 header h1 {
   margin: 0;
   padding: 5px;
-  -webkit-align-self: flex-start;
-  align-self: flex-start;
+  display: inline-block;
   color: var(--main-color);
 }
 header a h1:hover {
@@ -103,11 +98,11 @@ input#search {
 
 .navigation {
   margin: 0;
-  padding: 0 10px;
+  padding: 0 12px;
 }
 .navigation ul {
   margin: 0;
-  padding: 30px 0;
+  padding: 15px 0;
   text-align: left;
 }
 .navigation li {
@@ -161,14 +156,12 @@ input:focus, select:focus, textarea:focus, button:focus {
     width: 90%;
   }
 
-  header h1 {
-    display: none;
+  header {
+    padding: 15px 12px;
   }
 
-  input#search {
-    width: 100%;
-    padding: 8px;
-    margin-left: 0;
+  header h1 {
+    display: block;
     text-align: center;
   }
 

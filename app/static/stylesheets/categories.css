@@ -13,6 +13,10 @@ body article {
 	margin-bottom: 25px;
 }
 
+input#search {
+	margin: 24px 0;
+}
+
 li h3 {
 	color: white;
 	padding: 8px;
@@ -31,4 +35,11 @@ li h3 {
   body article {
     width: 80%;
   }
+
+	input#search {
+		width: 100%;
+		padding: 8px;
+		margin-left: 0;
+		text-align: center;
+	}
 }
