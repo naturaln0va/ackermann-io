@@ -61,7 +61,7 @@ header {
   margin: 0;
   padding: 30px 20px;
   background-color: white;
-  /*border-bottom: 2px solid var(--main-color);*/
+  background-color: #efefef;
 }
 header a {
   text-decoration: none;
@@ -123,7 +123,6 @@ input#search {
 .navigation li b {
   padding: 4px;
   color: var(--main-color);
-  font-weight: bolder;
   border-bottom: 2px solid var(--main-color);
 }
 
@@ -139,6 +138,13 @@ input:focus, select:focus, textarea:focus, button:focus {
   height: 2px;
   width: 100%;
   background-color: var(--main-color);
+}
+
+img#shape {
+	display: block;
+  float: right;
+	width: 36px;
+  height: 36px;
 }
 
 /* --- iOS | Portrait --- */
@@ -158,11 +164,6 @@ input:focus, select:focus, textarea:focus, button:focus {
 
   header {
     padding: 15px 12px;
-  }
-
-  header h1 {
-    display: block;
-    text-align: center;
   }
 
   .navigation ul {

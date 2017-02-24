@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="116px" height="120px" viewBox="0 0 116 120" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 42 (36781) - http://www.bohemiancoding.com/sketch -->
+    <title>SevenGEO</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <polygon id="path-1" points="57.9827561 54.0172439 115.965512 87.008622 57.9827561 120 0 87.008622"></polygon>
+        <mask id="mask-2" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="115.965512" height="65.9827561" fill="white">
+            <use xlink:href="#path-1"></use>
+        </mask>
+        <polygon id="path-3" points="57.991378 25.008622 115.974134 58 57.991378 90.991378 0.00862197135 58"></polygon>
+        <mask id="mask-4" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="115.965512" height="65.9827561" fill="white">
+            <use xlink:href="#path-3"></use>
+        </mask>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Seven" stroke="#E11315" stroke-width="24">
+            <use id="Rectangle-3" mask="url(#mask-2)" xlink:href="#path-1"></use>
+            <use id="Rectangle-3" mask="url(#mask-4)" transform="translate(57.991378, 58.000000) rotate(90.000000) translate(-57.991378, -58.000000) " xlink:href="#path-3"></use>
+        </g>
+    </g>
+</svg>

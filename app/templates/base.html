@@ -43,6 +43,9 @@
 				{% else %}
 					<a href="{{ url_for('index') }}"><h1>ryanackermann</h1></a>
 				{% endif %}
+				{% if shape_num > 0 %}
+					<img id="shape" src="static/shapes/{{ shape_num }}-geo-shape.svg">
+				{% endif %}
 			</header>
 			<div class="navigation">
 				<ul>
@@ -95,7 +98,6 @@
 			</div>
 		{% endblock %}
 		{% block content %}{% endblock %}
-			<script type="text/javascript" src="/static/scripts/base.js"></script>
 		{% block scripts %}{% endblock %}
 	</body>
 </html>
