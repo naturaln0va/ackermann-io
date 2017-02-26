@@ -8,7 +8,7 @@ from flask_mail import Message
 from werkzeug.utils import secure_filename
 from datetime import datetime, date
 from app import app, db, mail
-from config import UPLOAD_FOLDER
+from config import ASSETS_FOLDER, PHOTOS_FOLDER
 from .forms import PostForm, SearchForm
 from .models import Post, Category
 
@@ -28,6 +28,13 @@ def internal_error(error):
 def has_auth():
 	return 'username' in session
 
+def recent_photos():
+    photo_names = []
+    for filename in os.listdir(PHOTOS_FOLDER):
+        if filename.startswith('small-') and len(photo_names) < 9:
+            photo_names.append(filename)
+    return photo_names
+
 def requires_auth(f):
 	@wraps(f)
 	def decorated(*args, **kwargs):
@@ -41,7 +48,7 @@ def requires_auth(f):
 @app.route('/')
 def index():
 	posts = Post.query.order_by(Post.timestamp.desc()).filter_by(draft=False).all()
-	return render_template('index.html', posts=posts, auth=has_auth(), current='index', shape_num=randint(1,9))
+	return render_template('index.html', posts=posts, auth=has_auth(), current='index', shape_num=randint(1,9), photos=recent_photos())
 
 @app.route('/posts/<slug>')
 def post_view(slug):
@@ -72,6 +79,14 @@ def about():
     today = date.today()
     my_age = today.year - 1994 - ((today.month, today.day) < (11, 26))
     return render_template('about.html', auth=has_auth(), current='about', age=my_age, shape_num=randint(1,9))
+
+@app.route('/photos')
+def photos():
+    all_photo_names = []
+    for filename in os.listdir(PHOTOS_FOLDER):
+        if filename.startswith('small-'):
+            all_photo_names.append(filename)
+    return render_template('photos.html', auth=has_auth(), current='photos', photos=all_photo_names, shape_num=randint(1,9))
 
 @app.route('/privacy')
 def privacy():
@@ -182,19 +197,19 @@ def cms():
 	if request.method == 'POST':
 		for file in request.files.getlist("file[]"):
 			filename = secure_filename(file.filename)
-			file.save(os.path.join(UPLOAD_FOLDER, filename))
+			file.save(os.path.join(ASSETS_FOLDER, filename))
 		return redirect('/cms')
 	else:
-		if not os.path.exists(UPLOAD_FOLDER):
-			os.makedirs(UPLOAD_FOLDER)
+		if not os.path.exists(ASSETS_FOLDER):
+			os.makedirs(ASSETS_FOLDER)
 		dicts = []
-		for filename in os.listdir(UPLOAD_FOLDER):
-			dicts.append({'name': filename, 'size': os.path.getsize(os.path.join(UPLOAD_FOLDER, filename))})
+		for filename in os.listdir(ASSETS_FOLDER):
+			dicts.append({'name': filename, 'size': os.path.getsize(os.path.join(ASSETS_FOLDER, filename))})
 		sorted_items = sorted(dicts, key=itemgetter('name'))
 		return render_template('cms.html', items=sorted_items, auth=has_auth(), current='cms', shape_num=randint(1,9))
 
 @app.route('/cms/rm/<filename>')
 @requires_auth
 def delete_file(filename):
-	os.remove(os.path.join(UPLOAD_FOLDER, filename))
+	os.remove(os.path.join(ASSETS_FOLDER, filename))
 	return redirect('/cms')

@@ -13,7 +13,7 @@
 		<link rel="mask-icon" href="/static/favicon/safari-pinned-tab.svg" color="#e51415">
 		<link rel="shortcut icon" href="/static/favicon/favicon.ico">
 		<link rel="stylesheet" type="text/css" href="/static/stylesheets/primary.css">
-		
+
 		{% block stylesheet %}{% endblock %}
 	  {% if title %}
     	<title>{{ title }}</title>
@@ -39,8 +39,8 @@
 				{% else %}
 					<a href="{{ url_for('index') }}"><h1>ryanackermann</h1></a>
 				{% endif %}
-				{% if shape_num > 0 %}
-					<img id="shape" src="static/shapes/{{ shape_num }}-geo-shape.svg">
+				{% if shape_num %}
+					<img id="shape" src="/static/shapes/{{ shape_num }}-geo-shape.svg">
 				{% endif %}
 			</header>
 			<div class="navigation">
@@ -61,6 +61,12 @@
 						<li><b>portfolio</b></li>
 					{% else %}
 						<li><a href="{{ url_for('portfolio') }}">portfolio</a></li>
+					{% endif %}
+
+					{% if current == 'photos' %}
+						<li><b>photos</b></li>
+					{% else %}
+						<li><a href="{{ url_for('photos') }}">photos</a></li>
 					{% endif %}
 
 					{% if current == 'about' %}

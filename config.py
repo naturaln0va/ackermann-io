@@ -3,7 +3,8 @@
 import os
 
 # upload settings
-UPLOAD_FOLDER = 'app/static/assets'
+ASSETS_FOLDER = 'app/static/assets'
+PHOTOS_FOLDER = 'app/static/photos'
 ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
 
 # secret settings
