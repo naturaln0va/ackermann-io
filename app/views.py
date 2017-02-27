@@ -31,7 +31,7 @@ def has_auth():
 def recent_photos():
     photo_names = []
     for filename in os.listdir(PHOTOS_FOLDER):
-        if filename.startswith('small-') and len(photo_names) < 9:
+        if filename.startswith('small-') and len(photo_names) < 4:
             photo_names.append(filename)
     return photo_names
 

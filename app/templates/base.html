@@ -35,9 +35,9 @@
 		{% block menu %}
 			<header>
 				{% if current == 'index' %}
-					<b><h1>ryanackermann</h1></b>
+					<b><h1>.ryanAckermann()</h1></b>
 				{% else %}
-					<a href="{{ url_for('index') }}"><h1>ryanackermann</h1></a>
+					<a href="{{ url_for('index') }}"><h1>.ryanAckermann()</h1></a>
 				{% endif %}
 				{% if shape_num %}
 					<img id="shape" src="/static/shapes/{{ shape_num }}-geo-shape.svg">
