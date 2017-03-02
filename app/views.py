@@ -48,12 +48,12 @@ def requires_auth(f):
 @app.route('/')
 def index():
 	posts = Post.query.order_by(Post.timestamp.desc()).filter_by(draft=False).all()
-	return render_template('index.html', posts=posts, auth=has_auth(), current='index', shape_num=randint(1,9), photos=recent_photos())
+	return render_template('index.html', posts=posts, auth=has_auth(), current='index', photos=recent_photos(), shape_num=randint(1,9))
 
 @app.route('/posts/<slug>')
 def post_view(slug):
 	post = Post.query.filter_by(slug=slug).first()
-	return render_template('view_post.html', title=post.title, post=post, auth=has_auth(), current='home', shape_num=randint(1,9))
+	return render_template('view_post.html', title=post.title, post=post, auth=has_auth(), current='home')
 
 @app.route('/categories')
 def categories():
@@ -61,24 +61,24 @@ def categories():
 	for c in Category.query.order_by(Category.name).all():
 		if len(c.posts.filter_by(draft=False).all()) > 0:
 			dicts.append({'name': c.name, 'posts': c.posts})
-	return render_template('categories.html', dicts=dicts, auth=has_auth(), current='categories', shape_num=randint(1,9))
+	return render_template('categories.html', dicts=dicts, auth=has_auth(), current='categories')
 
 @app.route('/search/results/<query>')
 def search_results(query):
 	posts = Post.query.filter(Post.title.ilike('%'+query+'%')).order_by(Post.timestamp.desc()).filter_by(draft=False).all()
-	return render_template('search.html', query=query, posts=posts, auth=has_auth(), shape_num=randint(1,9))
+	return render_template('search.html', query=query, posts=posts, auth=has_auth())
 
 @app.route('/apps')
 @app.route('/portfolio')
 def portfolio():
-	return render_template('portfolio.html', auth=has_auth(), current='portfolio', shape_num=randint(1,9))
+	return render_template('portfolio.html', auth=has_auth(), current='portfolio')
 
 @app.route('/links')
 @app.route('/about')
 def about():
     today = date.today()
     my_age = today.year - 1994 - ((today.month, today.day) < (11, 26))
-    return render_template('about.html', auth=has_auth(), current='about', age=my_age, shape_num=randint(1,9))
+    return render_template('about.html', auth=has_auth(), current='about', age=my_age)
 
 @app.route('/photos')
 def photos():
@@ -86,15 +86,15 @@ def photos():
     for filename in os.listdir(PHOTOS_FOLDER):
         if filename.startswith('small-'):
             all_photo_names.append(filename)
-    return render_template('photos.html', auth=has_auth(), current='photos', photos=all_photo_names, shape_num=randint(1,9))
+    return render_template('photos.html', auth=has_auth(), current='photos', photos=all_photo_names)
 
 @app.route('/privacy')
 def privacy():
-	return render_template('privacy.html', title='Privacy', auth=has_auth(), shape_num=randint(1,9))
+	return render_template('privacy.html', title='Privacy', auth=has_auth())
 
 @app.route('/quakes')
 def quakes():
-	return render_template('quakes.html', title='Quakes', auth=has_auth(), shape_num=randint(1,9))
+	return render_template('quakes.html', title='Quakes', auth=has_auth())
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -103,7 +103,7 @@ def login():
 	if request.method == 'POST' and request.form['password'] == 'EQjmLRVwDX%;z&Ek94N(Fa7C6MGinbgmpg':
 		session['username'] = 'naturaln0va'
 		return redirect('/')
-	return render_template('login.html', auth=has_auth(), shape_num=randint(1,9))
+	return render_template('login.html', auth=has_auth())
 
 @app.route('/logout')
 def logout():
@@ -114,12 +114,12 @@ def logout():
 @requires_auth
 def drafts():
 	drafts = Post.query.order_by(Post.timestamp.desc()).filter_by(draft=True).all()
-	return render_template('drafts.html', drafts=drafts, auth=has_auth(), current='drafts', shape_num=randint(1,9))
+	return render_template('drafts.html', drafts=drafts, auth=has_auth(), current='drafts')
 
 @app.route('/drafts/<slug>')
 def draft_view(slug):
 	draft = Post.query.filter_by(draft=True).filter_by(slug=slug).first()
-	return render_template('view_post.html', title=draft.title, post=draft, auth=has_auth(), shape_num=randint(1,9))
+	return render_template('view_post.html', title=draft.title, post=draft, auth=has_auth())
 
 @app.route('/drafts/edit/<int:draft_id>', methods = ['GET', 'POST'])
 @requires_auth
@@ -147,7 +147,7 @@ def draft_edit(draft_id):
 			category = Category(form.category.data)
 		db.session.commit()
 		return redirect('/drafts')
-	return render_template('new_post.html', form=form, auth=has_auth(), shape_num=randint(1,9))
+	return render_template('new_post.html', form=form, auth=has_auth())
 
 @app.route('/drafts/rm/<int:draft_id>')
 @requires_auth
@@ -189,7 +189,7 @@ def new_post():
 	else:
 		print 'Errors in the form:'
 		print form.errors.items()
-	return render_template('new_post.html', form=form, auth=has_auth(), current='new_post', shape_num=randint(1,9))
+	return render_template('new_post.html', form=form, auth=has_auth(), current='new_post')
 
 @app.route('/cms', methods=['GET', 'POST'])
 @requires_auth
@@ -206,7 +206,7 @@ def cms():
 		for filename in os.listdir(ASSETS_FOLDER):
 			dicts.append({'name': filename, 'size': os.path.getsize(os.path.join(ASSETS_FOLDER, filename))})
 		sorted_items = sorted(dicts, key=itemgetter('name'))
-		return render_template('cms.html', items=sorted_items, auth=has_auth(), current='cms', shape_num=randint(1,9))
+		return render_template('cms.html', items=sorted_items, auth=has_auth(), current='cms')
 
 @app.route('/cms/rm/<filename>')
 @requires_auth

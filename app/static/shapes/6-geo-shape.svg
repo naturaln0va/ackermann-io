@@ -14,7 +14,7 @@
         </mask>
     </defs>
     <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <g id="Seven" stroke="#E11315" stroke-width="24">
+        <g id="Seven" stroke="#EFEFEF" stroke-width="24">
             <use id="Rectangle-3" mask="url(#mask-2)" xlink:href="#path-1"></use>
             <use id="Rectangle-3" mask="url(#mask-4)" transform="translate(57.991378, 58.000000) rotate(90.000000) translate(-57.991378, -58.000000) " xlink:href="#path-3"></use>
         </g>

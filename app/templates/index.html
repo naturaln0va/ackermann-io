@@ -13,19 +13,26 @@
 			<h1>Recent posts</h1>
 			{% for post in posts %}
 				<div class="post">
-					<div id="titledate">
-						<a href="/posts/{{ post.slug }}"><h2 id="title">{{ post.title }}</h2></a>
-						<div id="date">{{ post.timestamp|prettytime }}</div>
-					</div>
-					<div id="preview">
-						{{ post.description }}
-					</div>
+					<a href="/posts/{{ post.slug }}">
+						<div id="titledate">
+							<h2 id="title">{{ post.title }}</h2>
+							<div id="date">{{ post.timestamp|prettytime }}</div>
+						</div>
+						<div id="preview">
+							{{ post.description }}
+						</div>
+					</a>
 				</div>
 			{% endfor %}
 		{% endif %}
 		<h1>Recent Photos</h1>
 		<ul id="img-container"></ul>
 	</article>
+	<footer>
+		{% if shape_num %}
+			<img id="shape" src="/static/shapes/{{ shape_num }}-geo-shape.svg">
+		{% endif %}
+	</footer>
 {% endblock %}
 
 {% block scripts %}

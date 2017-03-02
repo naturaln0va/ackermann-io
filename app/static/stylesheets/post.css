@@ -32,6 +32,10 @@ footer {
   background-color: #FFF;
 }
 
+h1#title {
+	font-size: 2.75em;
+}
+
 #timestamp {
 	color: #aaa;
 }
