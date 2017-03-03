@@ -26,6 +26,24 @@ li h3 {
 	border-radius: 4px;
 }
 
+input#search {
+  margin-top: 32px;
+  padding: 5px;
+  margin-left: auto;
+  color: #333;
+  border: 2px solid var(--border-color);
+  border-radius: 9px;
+  font-size: 15px;
+  border-radius: 3px;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  font-family: inherit;
+  -webkit-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+}
+
 #date {
 	color: #aaa;
 	font-weight: bold;

@@ -6,6 +6,9 @@
 .post:hover {
 	text-decoration: underline;
 }
+.post #title {
+	color: var(--main-color);
+}
 .post #titledate {
 	padding: .5em 0;
 }
