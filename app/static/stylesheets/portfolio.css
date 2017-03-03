@@ -3,6 +3,13 @@
 	min-height: 100px;
 	margin: 40px 0;
 }
+.content-item a {
+	color: black;
+	text-decoration: none;
+}
+.content-item:hover {
+	text-decoration: underline;
+}
 .content-item h2 {
 	margin-bottom: 2px;
 	padding-bottom: 2px;
