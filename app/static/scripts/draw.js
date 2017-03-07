@@ -10,7 +10,7 @@ $(document).ready(function() {
     canvas.height = window.innerWidth < 750 ? viewportWidth * 4 / 3 : viewportWidth * 3 / 4;
 
     context.lineWidth = 10;
-    context.strokeStyle = '#2E94B9';
+    context.strokeStyle = '#E51415';
     context.lineJoin = context.lineCap = 'round';
 
     document.body.appendChild(canvas);
@@ -39,7 +39,7 @@ $(document).ready(function() {
         points.push({ x: trueX, y: trueY });
     }
 
-    function drawCanvas() {     
+    function drawCanvas() {
         context.beginPath();
         if (points.length == 1) {
             context.moveTo(points[0].x, points[0].y);
@@ -51,7 +51,7 @@ $(document).ready(function() {
             for (var i = 1; i < points.length - 2; i++) {
                 var c = (points[i].x + points[i + 1].x) / 2;
                 var d = (points[i].y + points[i + 1].y) / 2;
-             
+
                 context.quadraticCurveTo(points[i].x, points[i].y, c, d);
             }
         }
@@ -92,13 +92,13 @@ $(document).ready(function() {
                 drawCanvas();
             }
         }
-        e.preventDefault();        
+        e.preventDefault();
     };
 
     canvas.ontouchend = function(e) {
         isDrawing = false;
         points.length = 0;
-        e.preventDefault();        
+        e.preventDefault();
     };
 
     // mouse events
