@@ -1,9 +1,10 @@
 
 import os
+import subprocess
 from random import randint
 from functools import wraps
 from operator import itemgetter
-from flask import request, session, render_template, redirect, url_for, flash
+from flask import request, session, render_template, redirect, url_for, flash, abort
 from flask_mail import Message
 from werkzeug.utils import secure_filename
 from datetime import datetime, date
@@ -49,6 +50,15 @@ def requires_auth(f):
 def index():
 	posts = Post.query.order_by(Post.timestamp.desc()).filter_by(draft=False).all()
 	return render_template('index.html', posts=posts, auth=has_auth(), current='index', photos=recent_photos(), shape_num=randint(1,9))
+
+@app.route('/deploy', methods=['GET', 'POST'])
+def deploy():
+    if request.method == 'POST':
+        subprocess.check_call(['python', 'deployer.py'], cwd='../')
+        posts = Post.query.order_by(Post.timestamp.desc()).filter_by(draft=False).all()
+        return render_template('index.html', posts=posts, auth=has_auth(), current='index', photos=recent_photos(), shape_num=randint(1,9))
+    else:
+        abort(404)
 
 @app.route('/posts/<slug>')
 def post_view(slug):
