@@ -55,8 +55,7 @@ def index():
 def deploy():
     if request.method == 'POST':
         subprocess.check_call(['python', 'deployer.py'], cwd='../')
-        posts = Post.query.order_by(Post.timestamp.desc()).filter_by(draft=False).all()
-        return render_template('index.html', posts=posts, auth=has_auth(), current='index', photos=recent_photos(), shape_num=randint(1,9))
+        return redirect('/')
     else:
         abort(404)
 
