@@ -4,7 +4,7 @@ import subprocess
 from random import randint
 from functools import wraps
 from operator import itemgetter
-from flask import request, session, render_template, redirect, url_for, flash, abort
+from flask import request, session, render_template, redirect, url_for, flash, abort, jsonify
 from flask_mail import Message
 from werkzeug.utils import secure_filename
 from datetime import datetime, date
@@ -54,8 +54,10 @@ def index():
 @app.route('/deploy', methods=['GET', 'POST'])
 def deploy():
     if request.method == 'POST':
-        subprocess.check_call(['python', 'deployer.py'], cwd='../')
-        return redirect('/')
+        cwd = os.getcwd()
+        return jsonify(cwd)
+        # subprocess.check_call(['python', 'deployer.py'], cwd='../')
+        # return redirect('/')
     else:
         abort(404)
 
