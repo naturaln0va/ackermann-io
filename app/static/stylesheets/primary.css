@@ -6,6 +6,8 @@
 /* Variables */
 :root {
   --border-color: #CCC;
+  --better-black: #24292E;
+  --better-white: #C8C9CB;
   --main-color: #E51415;
   --main-hover-color: #C4191C;
   --main-background: linear-gradient(90deg, #2E94B9 0%, #27b1b1 100%);
@@ -62,10 +64,10 @@ body article a {
 header {
   margin: 0;
   display: flex;
-  padding: 30px 20px;
+  padding: 15px;
   align-items: center;
   justify-content: space-between;
-  background-color: #efefef;
+  background-color: var(--better-black);
 }
 header a {
   text-decoration: none;
@@ -75,12 +77,10 @@ header h1 {
   padding: 5px;
   font-size: 1.4em;
   align-self: flex-start;
-  color: black;
+  color: var(--better-white);
 }
 header a h1:hover {
-  border-radius: 5px;
-  color: #FEFEFE;
-  background-color: black;
+  color: white;
 }
 
 img#logo {
@@ -104,17 +104,17 @@ img#logo {
 .navigation li a {
   padding: 4px;
   text-decoration: none;
-  color: black;
+  color: var(--better-black);
 }
 .navigation li a:hover {
   color: white;
   border-radius: 3px;
-  background-color: black;
+  background-color: var(--better-black);
 }
 .navigation li b {
   padding: 4px;
-  color: black;
-  border-bottom: 2px solid black;
+  color: var(--better-black);
+  border-bottom: 2px solid var(--better-black);
 }
 
 input:focus, select:focus, textarea:focus, button:focus {
@@ -128,7 +128,7 @@ input:focus, select:focus, textarea:focus, button:focus {
   left: 0px;
   height: 2px;
   width: 100%;
-  background-color: black;
+  background-color: var(--better-black);
 }
 
 /* --- iOS | Portrait --- */
@@ -144,10 +144,6 @@ input:focus, select:focus, textarea:focus, button:focus {
 @media (max-width: 750px) and (min-width: 320px) {
   body article {
     width: 90%;
-  }
-
-  header {
-    padding: 15px 12px;
   }
 
   .navigation ul {
