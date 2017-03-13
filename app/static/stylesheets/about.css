@@ -9,10 +9,10 @@ ul.list {
 ul.list li {
 	margin: 8px;
 	padding: 8px;
-	background: #EFEFEF;
+	background: var(--better-black);
 	border-radius: 5px;
 	display: inline-block;
-	color: black;
+	color: white;
 }
 
 ul.list li:hover {
