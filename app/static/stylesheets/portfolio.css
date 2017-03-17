@@ -1,7 +1,7 @@
 
 .content-item {
 	min-height: 100px;
-	margin: 40px 0;
+	margin: 30px 0;
 }
 .content-item a {
 	color: black;
@@ -25,6 +25,7 @@
 	float: left;
 	box-shadow: 0 0 3px rgba(0, 0, 0, 0.3), inset 0 0 2px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.25);
 	margin-right: 20px;
+	margin-bottom: 20px;
 	box-sizing: border-box;
 	border-radius: 5px;
 }

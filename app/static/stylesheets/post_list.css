@@ -1,10 +1,13 @@
 
 .post {
-	margin-bottom: 20px;
+	padding-top: 12px;
+	padding-bottom: 8px;
+	/*margin-bottom: 20px;*/
 	border-bottom: 1px solid #ddd;
 }
 .post:hover {
-	text-decoration: underline;
+	background-color: #F5F5F5;
+	/*text-decoration: underline;*/
 }
 .post #title {
 	color: var(--main-color);
@@ -21,9 +24,10 @@
 	color: #aaa;
 }
 .post #preview {
+	color: black;
 	padding-bottom: 12px;
 }
-.post a {
+a {
 	color: black;
 	text-decoration: none;
 }

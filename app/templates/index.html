@@ -12,8 +12,8 @@
 		{% else %}
 			<h1>Recent posts</h1>
 			{% for post in posts %}
-				<div class="post">
-					<a href="/posts/{{ post.slug }}">
+				<a href="/posts/{{ post.slug }}">
+					<div class="post">
 						<div id="titledate">
 							<h2 id="title">{{ post.title }}</h2>
 							<div id="date">{{ post.timestamp|prettytime }}</div>
@@ -21,8 +21,8 @@
 						<div id="preview">
 							{{ post.description }}
 						</div>
-					</a>
-				</div>
+					</div>
+				</a>
 			{% endfor %}
 		{% endif %}
 		<h1>Recent Photos</h1>
