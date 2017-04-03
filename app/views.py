@@ -64,13 +64,16 @@ def deploy():
 def post_view(slug):
 	post = Post.query.filter_by(slug=slug).first()
 
-	# word_count = len(post.content.split())
-	# dur = math.ceil(word_count / 200)
-	# print 'Word count: ' + str(word_count)
-	# print "Duration: " + str(dur)
-	# if dur < 3: - extend further later
+	word_count = len(post.content.split())
+	dur = int(math.ceil(word_count / 200))
 
-	return render_template('view_post.html', title=post.title, post=post, dur=None, auth=has_auth(), current='home')
+	print 'Word count: ' + str(word_count)
+	print "Duration: " + str(dur)
+
+	if dur < 3:
+		dur = None
+
+	return render_template('view_post.html', title=post.title, post=post, dur=dur, auth=has_auth(), current='home')
 
 @app.route('/categories')
 def categories():

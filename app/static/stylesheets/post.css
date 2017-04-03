@@ -51,12 +51,25 @@ h1#title {
   height: 250px;
 }
 
+#catDur {
+  margin-bottom: 35px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid black;
+}
+
 #category {
   color: white;
+  display: inline;
   font-size: 0.85em;
   padding: 5px 8px;
   background-color: var(--main-color);
   border-radius: 3px;
+}
+
+#duration {
+  color: #aaa;
+  float: right;
+  display: inline;
 }
 
 input[type=button], input[type=submit] {

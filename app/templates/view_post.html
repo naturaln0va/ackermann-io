@@ -19,8 +19,12 @@
 		<h1 id="title">{{ post.title }}</h1>
 		<p id="timestamp">{{ post.timestamp|prettytime }}</p>
 		<p><em>{{ post.description }}</em></p>
-		<p><span id="category">{{ post.category.name }}</span></p>
-		<hr>
+		<div id="catDur">
+			<span id="category">{{ post.category.name }}</span>
+			{% if dur %}
+				<span id="duration">{{ dur }} minutes</span>
+			{% endif %}
+		</div>
 		<p>{{ post.content|markdown }}</p>
 		{% if not post.draft %}
 			<div id="share-button">
