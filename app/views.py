@@ -1,6 +1,5 @@
 
-import os
-import subprocess
+import os, math, subprocess
 from random import randint
 from functools import wraps
 from operator import itemgetter
@@ -64,7 +63,14 @@ def deploy():
 @app.route('/posts/<slug>')
 def post_view(slug):
 	post = Post.query.filter_by(slug=slug).first()
-	return render_template('view_post.html', title=post.title, post=post, auth=has_auth(), current='home')
+
+	# word_count = len(post.content.split())
+	# dur = math.ceil(word_count / 200)
+	# print 'Word count: ' + str(word_count)
+	# print "Duration: " + str(dur)
+	# if dur < 3: - extend further later
+
+	return render_template('view_post.html', title=post.title, post=post, dur=None, auth=has_auth(), current='home')
 
 @app.route('/categories')
 def categories():
