@@ -1,5 +1,5 @@
 
-import os, math, subprocess
+import os, math, subprocess, json
 from random import randint
 from functools import wraps
 from operator import itemgetter
@@ -22,6 +22,55 @@ def not_found_error(error):
 def internal_error(error):
     db.session.rollback()
     return render_template('500.html', title='500', auth=has_auth()), 500
+
+# Analytics
+
+def check_analytics_folder():
+	basedir = os.path.join(os.path.dirname( __file__ ), '..')
+	analytics_folder_path = os.path.join(basedir, 'analytics')
+	if not os.path.exists(analytics_folder_path):
+		os.makedirs(analytics_folder_path)
+	return analytics_folder_path
+
+def add_new_datapoint(service_name, category, path, key):
+	# check if the root folder exists
+	root_path = check_analytics_folder()
+	service_path = os.path.join(root_path, str(service_name) + 'analytics.json')
+	service_data = {}
+
+	# read from the current file
+	try:
+		data_file = open(service_path, 'r')
+		try:
+			service_data = json.load(data_file)
+		except ValueError:
+			print 'no json data, yet.'
+	except IOError:
+		file = open(service_path, 'w')
+
+	# this is gross, but idk what else to do
+	try: 
+		thing = service_data[category]
+	except KeyError:
+		service_data[category] = {}
+	try: 
+		thing = service_data[category][path]
+	except KeyError:
+		service_data[category][path] = {}
+	try: 
+		thing = service_data[category][path][key]
+	except KeyError:
+		service_data[category][path][key] = []
+
+	current_values = service_data[category][path][key]
+	current_values.append(str(datetime.now()))
+	service_data[category][path][key] = current_values
+
+	# write the current data
+	with open(service_path, 'w') as outfile:
+		new_data = json.dumps(service_data, sort_keys=True, separators=(',', ':'), ensure_ascii=False)
+		outfile.write(new_data)
+
 
 # Authentication
 
@@ -60,6 +109,30 @@ def deploy():
     else:
         abort(404)
 
+@app.route('/analytics', methods=['GET', 'POST'])
+def analytics():
+	if request.method == 'POST':
+		# record then issue a success json
+		data = request.json
+		service = data.get('service')
+		category = data.get('category')
+		path = data.get('path')
+		key = data.get('key')
+		if not data:
+			return jsonify({'error': 'json data not found'}), 400
+		if not service:
+			return jsonify({'error': 'service required'}), 400
+		if not category:
+			return jsonify({'error': 'category required'}), 400
+		if not path:
+			return jsonify({'error': 'path required'}), 400
+		if not key:
+			return jsonify({'error': 'key required'}), 400
+		add_new_datapoint(service, category, path, key)
+		return jsonify({'success': True}), 202
+	else:
+		return redirect('/')
+
 @app.route('/posts/<slug>')
 def post_view(slug):
 	post = Post.query.filter_by(slug=slug).first()
@@ -67,11 +140,11 @@ def post_view(slug):
 	word_count = len(post.content.split())
 	dur = int(math.ceil(word_count / 200))
 
-	print 'Word count: ' + str(word_count)
-	print "Duration: " + str(dur)
-
 	if dur < 3:
 		dur = None
+
+	# analytics
+	add_new_datapoint('ackermannio', 'posts', slug, 'impressions')
 
 	return render_template('view_post.html', title=post.title, post=post, dur=dur, auth=has_auth(), current='home')
 
