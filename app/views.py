@@ -25,6 +25,26 @@ def internal_error(error):
 
 # Analytics
 
+def set_value_for_keypath(d, keypath, value):
+    keys = keypath.split('.')
+    last = keys.pop()
+    start = keys.pop(0)
+    p = d[start] = d.get(start, {})
+    for k in keys:
+        p[k] = p.get(k, {})
+        p = p[k]
+    p[last] = value
+
+def get_value_for_keypath(d, keypath):
+    keys = keypath.split('.')
+    last = keys.pop()
+    start = keys.pop(0)
+    p = d[start] = d.get(start, {})
+    for k in keys:
+        p[k] = p.get(k, {})
+        p = p[k]
+    return p.get(last)
+
 def check_analytics_folder():
 	basedir = os.path.join(os.path.dirname( __file__ ), '..')
 	analytics_folder_path = os.path.join(basedir, 'analytics')
@@ -32,7 +52,7 @@ def check_analytics_folder():
 		os.makedirs(analytics_folder_path)
 	return analytics_folder_path
 
-def add_new_datapoint(service_name, category, path, key):
+def add_new_datapoint(service_name, keypath):
 	# check if the root folder exists
 	root_path = check_analytics_folder()
 	service_path = os.path.join(root_path, str(service_name) + 'analytics.json')
@@ -48,23 +68,12 @@ def add_new_datapoint(service_name, category, path, key):
 	except IOError:
 		file = open(service_path, 'w')
 
-	# this is gross, but idk what else to do
-	try: 
-		thing = service_data[category]
-	except KeyError:
-		service_data[category] = {}
-	try: 
-		thing = service_data[category][path]
-	except KeyError:
-		service_data[category][path] = {}
-	try: 
-		thing = service_data[category][path][key]
-	except KeyError:
-		service_data[category][path][key] = []
-
-	current_values = service_data[category][path][key]
-	current_values.append(str(datetime.now()))
-	service_data[category][path][key] = current_values
+	current_values = get_value_for_keypath(service_data, keypath)
+	if not current_values:
+		current_values = []
+	now = str(datetime.now())
+	current_values.append(now)
+	set_value_for_keypath(service_data, keypath, current_values)
 
 	# write the current data
 	with open(service_path, 'w') as outfile:
@@ -96,6 +105,7 @@ def requires_auth(f):
 
 @app.route('/')
 def index():
+	add_new_datapoint('ackermannio', 'root.impressions')
 	posts = Post.query.order_by(Post.timestamp.desc()).filter_by(draft=False).all()
 	return render_template('index.html', posts=posts, auth=has_auth(), current='index', photos=recent_photos(), shape_num=randint(1,9))
 
@@ -112,23 +122,19 @@ def deploy():
 @app.route('/analytics', methods=['GET', 'POST'])
 def analytics():
 	if request.method == 'POST':
-		# record then issue a success json
 		data = request.json
 		service = data.get('service')
-		category = data.get('category')
 		path = data.get('path')
-		key = data.get('key')
 		if not data:
+			print 'bad data'
 			return jsonify({'error': 'json data not found'}), 400
 		if not service:
+			print 'no service'
 			return jsonify({'error': 'service required'}), 400
-		if not category:
-			return jsonify({'error': 'category required'}), 400
 		if not path:
+			print 'no path'
 			return jsonify({'error': 'path required'}), 400
-		if not key:
-			return jsonify({'error': 'key required'}), 400
-		add_new_datapoint(service, category, path, key)
+		add_new_datapoint(service, path)
 		return jsonify({'success': True}), 202
 	else:
 		return redirect('/')
@@ -144,7 +150,8 @@ def post_view(slug):
 		dur = None
 
 	# analytics
-	add_new_datapoint('ackermannio', 'posts', slug, 'impressions')
+	path = '.'.join(['posts', slug, 'impressions'])
+	add_new_datapoint('ackermannio', path)
 
 	return render_template('view_post.html', title=post.title, post=post, dur=dur, auth=has_auth(), current='home')
 
@@ -159,6 +166,7 @@ def categories():
 @app.route('/search/results/<query>')
 def search_results(query):
 	posts = Post.query.filter(Post.title.ilike('%'+query+'%')).order_by(Post.timestamp.desc()).filter_by(draft=False).all()
+	add_new_datapoint('ackermannio', 'search.' + query)
 	return render_template('search.html', query=query, posts=posts, auth=has_auth())
 
 @app.route('/apps')
@@ -187,6 +195,7 @@ def privacy():
 
 @app.route('/quakes')
 def quakes():
+	add_new_datapoint('ackermannio', 'quakes.impressions')
 	return render_template('quakes.html', title='Quakes', auth=has_auth())
 
 @app.route('/login', methods=['GET', 'POST'])
