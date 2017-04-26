@@ -52,6 +52,19 @@ def check_analytics_folder():
 		os.makedirs(analytics_folder_path)
 	return analytics_folder_path
 
+def get_analytics_dict(named):
+	file_name = named + 'analytics.json'
+	basedir = os.path.join(os.path.dirname( __file__ ), '..')
+	analytics_folder_path = os.path.join(basedir, 'analytics')
+	if not os.path.exists(analytics_folder_path):
+		return None
+	analytics_file_path = os.path.join(analytics_folder_path, file_name)
+	if not os.path.exists(analytics_file_path):
+		return None
+	with open(analytics_file_path, 'r') as data_file:
+		return json.load(data_file)
+	return None
+
 def add_new_datapoint(service_name, keypath):
 	# check if the root folder exists
 	root_path = check_analytics_folder()
@@ -79,7 +92,6 @@ def add_new_datapoint(service_name, keypath):
 	with open(service_path, 'w') as outfile:
 		new_data = json.dumps(service_data, sort_keys=True, separators=(',', ':'), ensure_ascii=False)
 		outfile.write(new_data)
-
 
 # Authentication
 
@@ -126,18 +138,23 @@ def analytics():
 		service = data.get('service')
 		path = data.get('path')
 		if not data:
-			print 'bad data'
 			return jsonify({'error': 'json data not found'}), 400
 		if not service:
-			print 'no service'
 			return jsonify({'error': 'service required'}), 400
 		if not path:
-			print 'no path'
 			return jsonify({'error': 'path required'}), 400
 		add_new_datapoint(service, path)
 		return jsonify({'success': True}), 202
 	else:
-		return redirect('/')
+		return render_template('analytics.html', auth=has_auth())
+
+@app.route('/analytics/<query>')
+def analytics_view(query):
+	d = get_analytics_dict(query)
+	if not d:
+		return redirect('/analytics')
+	return jsonify(d)
+	# return render_template('analytics.html', data=d, auth=has_auth())
 
 @app.route('/posts/<slug>')
 def post_view(slug):
