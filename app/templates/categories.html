@@ -20,6 +20,14 @@
 		</ul>
 	</article>
 {% endblock %}
+
 {% block scripts %}
-	<script type="text/javascript" src="/static/scripts/base.js"></script>
+	<script type="text/javascript">
+		var searchField = document.getElementById("search");
+		searchField.addEventListener('keyup', function(e) {
+			if (e.keyCode === 13) {
+				window.location.href = '/search/results/' + searchField.value;
+			}
+		}, false);
+	</script>
 {% endblock %}

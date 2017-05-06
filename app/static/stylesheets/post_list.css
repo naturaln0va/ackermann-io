@@ -43,37 +43,3 @@ img#shape {
 	width: 100%;
 	height: 42px;
 }
-
-ul#img-container {
-	padding: 0;
-	margin: 0 50px;
-	line-height: 0;
-	list-style: none;
-}
-ul#img-container li {
-	width: 25%;
-	display: inline-block;
-}
-img.recent-photo {
-	width: 100%;
-	height: auto;
-}
-
-@media only screen and (max-width : 480px) {
-   /* Smartphone view: 1 tile */
-	 ul#img-container li {
-	 	width: 100%;
-	 }
- }
-@media only screen and (max-width : 650px) and (min-width : 481px) {
-   /* Tablet view: 2 tiles */
-	 ul#img-container li {
-		width: 50%;
-	 }
-}
-@media only screen and (max-width : 1050px) and (min-width : 651px) {
-   /* Small desktop / ipad view: 3 tiles */
-	 ul#img-container li {
-	 	width: 25%;
-	 }
-}

@@ -8,7 +8,7 @@ from flask_mail import Message
 from werkzeug.utils import secure_filename
 from datetime import datetime, date
 from app import app, db, mail
-from config import ASSETS_FOLDER, PHOTOS_FOLDER
+from config import ASSETS_FOLDER
 from .forms import PostForm, SearchForm
 from .models import Post, Category
 
@@ -98,13 +98,6 @@ def add_new_datapoint(service_name, keypath):
 def has_auth():
 	return 'username' in session
 
-def recent_photos():
-    photo_names = []
-    for filename in os.listdir(PHOTOS_FOLDER):
-        if filename.startswith('small-') and len(photo_names) < 4:
-            photo_names.append(filename)
-    return photo_names
-
 def requires_auth(f):
 	@wraps(f)
 	def decorated(*args, **kwargs):
@@ -119,7 +112,7 @@ def requires_auth(f):
 def index():
 	add_new_datapoint('ackermannio', 'root.impressions')
 	posts = Post.query.order_by(Post.timestamp.desc()).filter_by(draft=False).all()
-	return render_template('index.html', posts=posts, auth=has_auth(), current='index', photos=recent_photos(), shape_num=randint(1,9))
+	return render_template('index.html', posts=posts, auth=has_auth(), current='index', shape_num=randint(1,9))
 
 @app.route('/deploy', methods=['GET', 'POST'])
 def deploy():
@@ -197,14 +190,6 @@ def about():
     today = date.today()
     my_age = today.year - 1994 - ((today.month, today.day) < (11, 26))
     return render_template('about.html', auth=has_auth(), current='about', age=my_age)
-
-@app.route('/photos')
-def photos():
-    all_photo_names = []
-    for filename in os.listdir(PHOTOS_FOLDER):
-        if filename.startswith('small-'):
-            all_photo_names.append(filename)
-    return render_template('photos.html', auth=has_auth(), current='photos', photos=all_photo_names)
 
 @app.route('/privacy')
 def privacy():

@@ -25,32 +25,10 @@
 				</a>
 			{% endfor %}
 		{% endif %}
-		<h1>Recent Photos</h1>
-		<ul id="img-container"></ul>
 	</article>
 	<footer>
 		{% if shape_num %}
 			<img id="shape" src="/static/shapes/{{ shape_num }}-geo-shape.svg">
 		{% endif %}
 	</footer>
-{% endblock %}
-
-{% block scripts %}
-		<script type="text/javascript">
-			var photos = {{ photos|safe }};
-			for (var i = 0; i < photos.length; i++) {
-				var photo = photos[i];
-				var imgListItem = document.createElement("li");
-				var imgLinkElem = document.createElement("a");
-				var imgElem = document.createElement("img");
-
-				imgElem.className = "recent-photo";
-				imgElem.src = "/static/photos/" + photo;
-				imgLinkElem.href = "/static/photos/" + photo.replace("small-", "");
-
-				imgLinkElem.appendChild(imgElem);
-				imgListItem.appendChild(imgLinkElem);
-				document.getElementById("img-container").appendChild(imgListItem);
-			}
-		</script>
 {% endblock %}
