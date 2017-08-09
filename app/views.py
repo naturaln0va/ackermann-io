@@ -110,7 +110,6 @@ def requires_auth(f):
 
 @app.route('/')
 def index():
-	add_new_datapoint('ackermannio', 'root.impressions')
 	posts = Post.query.order_by(Post.timestamp.desc()).filter_by(draft=False).all()
 	return render_template('index.html', posts=posts, auth=has_auth(), current='index', shape_num=randint(1,9))
 
@@ -136,7 +135,6 @@ def analytics():
 			return jsonify({'error': 'service required'}), 400
 		if not path:
 			return jsonify({'error': 'path required'}), 400
-		add_new_datapoint(service, path)
 		return jsonify({'success': True}), 202
 	else:
 		return render_template('analytics.html', auth=has_auth())
@@ -161,7 +159,6 @@ def post_view(slug):
 
 	# analytics
 	path = '.'.join(['posts', slug, 'impressions'])
-	add_new_datapoint('ackermannio', path)
 
 	return render_template('view_post.html', title=post.title, post=post, dur=dur, auth=has_auth(), current='home')
 
@@ -176,7 +173,6 @@ def categories():
 @app.route('/search/results/<query>')
 def search_results(query):
 	posts = Post.query.filter(Post.title.ilike('%'+query+'%')).order_by(Post.timestamp.desc()).filter_by(draft=False).all()
-	add_new_datapoint('ackermannio', 'search.' + query)
 	return render_template('search.html', query=query, posts=posts, auth=has_auth())
 
 @app.route('/apps')
@@ -197,7 +193,6 @@ def privacy():
 
 @app.route('/quakes')
 def quakes():
-	add_new_datapoint('ackermannio', 'quakes.impressions')
 	return render_template('quakes.html', title='Quakes', auth=has_auth())
 
 @app.route('/login', methods=['GET', 'POST'])
