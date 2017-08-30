@@ -1,7 +1,8 @@
 
 /* Imports */
 /*@import url(https://fonts.googleapis.com/css?family=PT+Mono);*/
-@import url('https://fonts.googleapis.com/css?family=Source+Code+Pro:400,700');
+/*@import url('https://fonts.googleapis.com/css?family=Source+Code+Pro:400,700');*/
+@import url('https://fonts.googleapis.com/css?family=Fira+Mono:400,700');
 
 /* Variables */
 :root {
@@ -37,7 +38,8 @@
 /* Body */
 body {
   /*font-family: 'PT Mono', monospace, serif;*/
-  font-family: 'Source Code Pro', monospace;
+  /*font-family: 'Source Code Pro', monospace;*/
+  font-family: 'Fira Mono', monospace;
   background: #FFF;
   text-align: left;
   margin: 0;
