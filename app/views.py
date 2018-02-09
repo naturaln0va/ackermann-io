@@ -245,6 +245,7 @@ def draft_edit(draft_id):
 		category = Category.query.filter_by(name=form.category.data).first()
 		if not category:
 			category = Category(form.category.data)
+		draft.category = category
 		db.session.commit()
 		return redirect('/drafts')
 	return render_template('new_post.html', form=form, auth=has_auth())
