@@ -166,8 +166,9 @@ def post_view(slug):
 def categories():
 	dicts = []
 	for c in Category.query.order_by(Category.name).all():
-		if len(c.posts.filter_by(draft=False).all()) > 0:
-			dicts.append({'name': c.name, 'posts': c.posts})
+		none_draft_posts = c.posts.filter_by(draft=False).all()
+		if len(none_draft_posts) > 0:
+			dicts.append({'name': c.name, 'posts': none_draft_posts})
 	return render_template('categories.html', dicts=dicts, auth=has_auth(), current='categories')
 
 @app.route('/search/results/<query>')
