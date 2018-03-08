@@ -1,5 +1,5 @@
 
-import os, math, subprocess, json
+import os, math, subprocess, json, pyotp
 from random import randint
 from functools import wraps
 from operator import itemgetter
@@ -8,7 +8,7 @@ from flask_mail import Message
 from werkzeug.utils import secure_filename
 from datetime import datetime, date
 from app import app, db, mail
-from config import ASSETS_FOLDER
+from config import ASSETS_FOLDER, OTP_SECRET
 from .forms import PostForm, SearchForm
 from .models import Post, Category
 
@@ -104,10 +104,11 @@ def quakes():
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
+	totp = pyotp.TOTP(OTP_SECRET)
 	if has_auth():
 		return redirect('/')
-	if request.method == 'POST' and request.form['password'] == 'EQjmLRVwDX%;z&Ek94N(Fa7C6MGinbgmpg':
-		session['username'] = 'naturaln0va'
+	if request.method == 'POST' and request.form['password'] == totp.now():
+		session['username'] = 'master'
 		return redirect('/')
 	return render_template('login.html', auth=has_auth())
 
@@ -194,8 +195,8 @@ def new_post():
 		db.session.commit()
 		return redirect('/drafts')
 	else:
-		print 'Errors in the form:'
-		print form.errors.items()
+		print('Errors in the form:')
+		print(form.errors.items())
 	return render_template('new_post.html', form=form, auth=has_auth(), current='new_post')
 
 @app.route('/cms', methods=['GET', 'POST'])

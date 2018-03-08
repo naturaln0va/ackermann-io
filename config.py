@@ -5,6 +5,9 @@ import os
 # upload settings
 ASSETS_FOLDER = 'app/static/assets'
 
+# one time password settings
+OTP_SECRET = '4OP44OGA5KFYCPBP'
+
 # secret settings
 SECRET_KEY = 'k?yhGAcb9bFvtH99NYAz[fR87EQFN^6*#q6v'
 
