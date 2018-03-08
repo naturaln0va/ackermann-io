@@ -23,76 +23,6 @@ def internal_error(error):
     db.session.rollback()
     return render_template('500.html', title='500', auth=has_auth()), 500
 
-# Analytics
-
-def set_value_for_keypath(d, keypath, value):
-    keys = keypath.split('.')
-    last = keys.pop()
-    start = keys.pop(0)
-    p = d[start] = d.get(start, {})
-    for k in keys:
-        p[k] = p.get(k, {})
-        p = p[k]
-    p[last] = value
-
-def get_value_for_keypath(d, keypath):
-    keys = keypath.split('.')
-    last = keys.pop()
-    start = keys.pop(0)
-    p = d[start] = d.get(start, {})
-    for k in keys:
-        p[k] = p.get(k, {})
-        p = p[k]
-    return p.get(last)
-
-def check_analytics_folder():
-	basedir = os.path.join(os.path.dirname( __file__ ), '..')
-	analytics_folder_path = os.path.join(basedir, 'analytics')
-	if not os.path.exists(analytics_folder_path):
-		os.makedirs(analytics_folder_path)
-	return analytics_folder_path
-
-def get_analytics_dict(named):
-	file_name = named + 'analytics.json'
-	basedir = os.path.join(os.path.dirname( __file__ ), '..')
-	analytics_folder_path = os.path.join(basedir, 'analytics')
-	if not os.path.exists(analytics_folder_path):
-		return None
-	analytics_file_path = os.path.join(analytics_folder_path, file_name)
-	if not os.path.exists(analytics_file_path):
-		return None
-	with open(analytics_file_path, 'r') as data_file:
-		return json.load(data_file)
-	return None
-
-def add_new_datapoint(service_name, keypath):
-	# check if the root folder exists
-	root_path = check_analytics_folder()
-	service_path = os.path.join(root_path, str(service_name) + 'analytics.json')
-	service_data = {}
-
-	# read from the current file
-	try:
-		data_file = open(service_path, 'r')
-		try:
-			service_data = json.load(data_file)
-		except ValueError:
-			print 'no json data, yet.'
-	except IOError:
-		file = open(service_path, 'w')
-
-	current_values = get_value_for_keypath(service_data, keypath)
-	if not current_values:
-		current_values = []
-	now = str(datetime.now())
-	current_values.append(now)
-	set_value_for_keypath(service_data, keypath, current_values)
-
-	# write the current data
-	with open(service_path, 'w') as outfile:
-		new_data = json.dumps(service_data, sort_keys=True, separators=(',', ':'), ensure_ascii=False)
-		outfile.write(new_data)
-
 # Authentication
 
 def has_auth():
@@ -122,30 +52,6 @@ def deploy():
         # return redirect('/')
     else:
         abort(404)
-
-@app.route('/analytics', methods=['GET', 'POST'])
-def analytics():
-	if request.method == 'POST':
-		data = request.json
-		service = data.get('service')
-		path = data.get('path')
-		if not data:
-			return jsonify({'error': 'json data not found'}), 400
-		if not service:
-			return jsonify({'error': 'service required'}), 400
-		if not path:
-			return jsonify({'error': 'path required'}), 400
-		return jsonify({'success': True}), 202
-	else:
-		return render_template('analytics.html', auth=has_auth())
-
-@app.route('/analytics/<query>')
-def analytics_view(query):
-	d = get_analytics_dict(query)
-	if not d:
-		return redirect('/analytics')
-	return jsonify(d)
-	# return render_template('analytics.html', data=d, auth=has_auth())
 
 @app.route('/posts/<slug>')
 def post_view(slug):
