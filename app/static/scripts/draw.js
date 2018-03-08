@@ -10,7 +10,7 @@ $(document).ready(function() {
     canvas.height = window.innerWidth < 750 ? viewportWidth * 4 / 3 : viewportWidth * 3 / 4;
 
     context.lineWidth = 10;
-    context.strokeStyle = '#E51415';
+    context.strokeStyle = '#BA2328';
     context.lineJoin = context.lineCap = 'round';
 
     document.body.appendChild(canvas);
