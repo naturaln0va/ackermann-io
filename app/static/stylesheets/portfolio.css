@@ -14,6 +14,11 @@
 	margin-bottom: 2px;
 	padding-bottom: 2px;
 }
+.role {
+	font-weight: 400;
+	font-size: 0.8em;
+	color: #aaa;
+}
 .content-item p {
 	margin-top: 2px;
 	padding-top: 2px;
