@@ -63,6 +63,8 @@
 						<li><a href="{{ url_for('about') }}">about</a></li>
 					{% endif %}
 
+					<li><a href="{{ url_for('feed') }}">feed</a></li>
+
 					{% if auth %}
 						{% if current == 'new_post' %}
 							<li><b>new post</b></li>

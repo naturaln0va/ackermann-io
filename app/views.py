@@ -3,10 +3,13 @@ import os, math, subprocess, json
 from random import randint
 from functools import wraps
 from operator import itemgetter
-from flask import request, session, render_template, redirect, url_for, flash, abort, jsonify
+from flask import request, session, render_template, redirect, url_for, flash, abort, jsonify, Markup
 from flask_mail import Message
+from urlparse import urljoin
 from werkzeug.utils import secure_filename
+from werkzeug.contrib.atom import AtomFeed
 from datetime import datetime, date
+from markdown import markdown as md
 from app import app, db, mail
 from config import ASSETS_FOLDER
 from .forms import PostForm, SearchForm
@@ -22,6 +25,11 @@ def not_found_error(error):
 def internal_error(error):
     db.session.rollback()
     return render_template('500.html', title='500', auth=has_auth()), 500
+
+# Helpers
+
+def make_external(url):
+	return urljoin(request.url_root, url)
 
 # Authentication
 
@@ -63,9 +71,6 @@ def post_view(slug):
 	if dur < 3:
 		dur = None
 
-	# analytics
-	path = '.'.join(['posts', slug, 'impressions'])
-
 	return render_template('view_post.html', title=post.title, post=post, dur=dur, auth=has_auth(), current='home')
 
 @app.route('/categories')
@@ -101,6 +106,18 @@ def privacy():
 @app.route('/quakes')
 def quakes():
 	return render_template('quakes.html', title='Quakes', auth=has_auth())
+
+@app.route('/feed')
+def feed():
+	icon_url = make_external('/static/favicon/apple-touch-icon.png')
+	feed = AtomFeed('Ryan Ackermann', subtitle='My recent posts', logo=icon_url, feed_url=request.url, url=request.url_root)
+	posts = Post.query.order_by(Post.timestamp.desc()).filter_by(draft=False).limit(10).all()
+	author_name = 'Ryan Ackermann'
+	for post in posts:
+		url = make_external(post.url())
+		content = Markup(md(post.content))
+		feed.add(post.title, unicode(content), content_type='html', author=author_name, url=url, updated=post.timestamp, published=post.timestamp)
+	return feed.get_response()
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():

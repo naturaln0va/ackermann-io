@@ -26,6 +26,9 @@ class Post(db.Model):
     def __repr__(self):
         return '<Post [%r] %r - %r>' % self.slug % self.title % self.category
 
+    def url(self):
+        return '/posts/' + self.slug
+
 class Category(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(50))
