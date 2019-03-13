@@ -61,6 +61,15 @@ def deploy():
     else:
         abort(404)
 
+@app.route('/kakao-auth')
+def kakao_auth():
+	auth_url = 'youversion://kakao-auth'
+
+	if len(request.query_string) > 0:
+		auth_url += '?' + request.query_string
+
+	return redirect(auth_url)
+
 @app.route('/posts/<slug>')
 def post_view(slug):
 	post = Post.query.filter_by(slug=slug).first()
