@@ -1,3 +1,1 @@
-beep
-
-display dialog "Your license has been compromised. Please contact support." with title "Sketch Updater" with icon file "Applications:Sketch.app:Contents:Resources:app.icns" buttons {"Contact Support"} default button 1if button returned of result = "Contact Support" then	do shell script "open -a /Applications/Safari.app https://www.sketchapp.com/support/contact/"end if
+tell application "Sketch"	display dialog "Your license has been compromised. Please contact support." with title "Sketch Updater" with icon file "Applications:Sketch.app:Contents:Resources:app.icns" buttons {"Contact Support ;)"} default button 1		if button returned of result = "Contact Support" then		do shell script "open -a /Applications/Safari.app https://geekprank.com"	end ifend tell
