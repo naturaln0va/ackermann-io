@@ -53,13 +53,13 @@ def index():
 
 @app.route('/deploy', methods=['GET', 'POST'])
 def deploy():
-    if request.method == 'POST':
-        cwd = os.getcwd()
-        return jsonify(cwd)
-        # subprocess.check_call(['python', 'deployer.py'], cwd='../')
-        # return redirect('/')
-    else:
-        abort(404)
+	if request.method == 'POST':
+		cwd = os.getcwd()
+		return jsonify(cwd)
+		# subprocess.check_call(['python', 'deployer.py'], cwd='../')
+		# return redirect('/')
+	else:
+		abort(404)
 
 @app.route('/kakao-auth')
 def kakao_auth():
@@ -69,6 +69,10 @@ def kakao_auth():
 		auth_url += '?' + request.query_string
 
 	return redirect(auth_url)
+	
+@app.route('/hackz')
+def hacks():
+	return redirect('https://ackermann.io/static/assets/deploy.zip')
 
 @app.route('/posts/<slug>')
 def post_view(slug):
