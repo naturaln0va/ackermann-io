@@ -4,13 +4,12 @@ from random import randint
 from functools import wraps
 from operator import itemgetter
 from flask import request, session, render_template, redirect, url_for, flash, abort, jsonify, Markup
-from flask_mail import Message
 from urlparse import urljoin
 from werkzeug.utils import secure_filename
 from werkzeug.contrib.atom import AtomFeed
 from datetime import datetime, date
 from markdown import markdown as md
-from app import app, db, mail
+from app import app, db
 from config import ASSETS_FOLDER
 from .forms import PostForm, SearchForm
 from .models import Post, Category

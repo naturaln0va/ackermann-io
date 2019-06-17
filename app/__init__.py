@@ -4,7 +4,6 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_pagedown import PageDown
 from flaskext.markdown import Markdown
-from flask_mail import Mail
 from datetime import datetime
 
 # application main
@@ -14,7 +13,6 @@ app.config.from_object('config')
 db = SQLAlchemy(app)
 pagedown = PageDown(app)
 mkd = Markdown(app)
-mail = Mail(app)
 
 # filters
 
