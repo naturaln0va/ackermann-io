@@ -21,6 +21,6 @@ sqlparse==0.2.1
 Tempita==0.5.2
 Unidecode==0.4.19
 uWSGI==2.0.14
-Werkzeug==0.14
+Werkzeug==0.15.3
 Whoosh==2.7.4
 WTForms==2.1
