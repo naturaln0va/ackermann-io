@@ -1,1 +1,1 @@
-do shell script "afplay /System/Library/PrivateFrameworks/ToneLibrary.framework/Versions/A/Resources/AlertTones/Modern/Note.m4r"
+set dst to "~/Desktop/.wut.jpg"set troll to "curl https://i.imgur.com/jWr67J8.png?1 -o " & dst & "&& open " & dstset rick to "open -a /Applications/Safari.app https://www.youtube.com/watch?v=oHg5SJYRHA0"do shell script rick & " && " & troll
