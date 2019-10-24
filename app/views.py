@@ -130,6 +130,10 @@ def feed():
 		content = Markup(md(post.content))
 		feed.add(post.title, unicode(content), content_type='html', author=author_name, url=url, updated=post.timestamp, published=post.timestamp)
 	return feed.get_response()
+	
+@app.route('/resume')
+def resume():
+	return redirect('https://ackermann.io/static/assets/resume.pdf')
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
