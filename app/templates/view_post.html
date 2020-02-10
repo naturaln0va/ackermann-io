@@ -2,6 +2,8 @@
 {% extends "base.html" %}
 
 {% block stylesheet %}
+	<meta name="description" content="{{ post.description }}">
+	<meta name="keywords" content="{{ post.category.name }}">
 	<link rel="stylesheet" type="text/css" href="/static/stylesheets/better_post.css">
 	<link rel="stylesheet" type="text/css" href="/static/stylesheets/github.css">
 	<script src="/static/scripts/highlight.pack.js" type="text/javascript" charset="utf-8"></script>
