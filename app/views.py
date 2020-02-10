@@ -144,16 +144,12 @@ def login():
 		return redirect('/')
 	
 	if request.method == 'POST':		
-		try:
-			with open('pw.txt', 'r') as file:
-				password = file.read()
-				
-				if request.form['password'] == password:
-					session['username'] = 'naturaln0va'
-					return redirect('/')
-		except BaseException as err:
-			print('An exception occurred {}'.format(err))
-			return redirect('/')
+		with open('pw.txt', 'r') as file:
+			password = file.read()
+			
+			if request.form['password'] == password:
+				session['username'] = 'naturaln0va'
+				return redirect('/')
 	return render_template('login.html', auth=has_auth())
 
 @app.route('/logout')
