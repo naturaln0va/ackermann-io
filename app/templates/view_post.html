@@ -2,7 +2,7 @@
 {% extends "base.html" %}
 
 {% block stylesheet %}
-	<link rel="stylesheet" type="text/css" href="/static/stylesheets/post.css">
+	<link rel="stylesheet" type="text/css" href="/static/stylesheets/better_post.css">
 	<link rel="stylesheet" type="text/css" href="/static/stylesheets/github.css">
 	<script src="/static/scripts/highlight.pack.js" type="text/javascript" charset="utf-8"></script>
 	<script>hljs.initHighlightingOnLoad();</script>
@@ -31,34 +31,6 @@
 				<a href="https://twitter.com/share" class="twitter-share-button" data-size="large" data-via="naturaln0va" data-show-count="false">Tweet</a><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
 			</div>
 		{% endif %}
-		<footer>&copy; 2016 Ryan Ackermann</footer>
+		<footer>&copy; {{cpwy}} Ryan Ackermann</footer>
 	</article>
-{% endblock %}
-
-{% block scripts %}
-	<script type="text/javascript">
-		function buttonClicked(elem) {
-			window.location.href = '/drafts/edit/' + elem.name;
-		}
-
-		let url = window.location.href + '/analytics';
-
-		var counter = 0;
-		var interval = setInterval(tick, 1000);
-
-		function tick() {
-			counter++;
-
-			if (counter == 30) {
-				clearInterval(interval);
-
-				xhr = new XMLHttpRequest();
-				xhr.open("POST", url, true);
-				xhr.setRequestHeader("Content-type", "application/json");
-				var path = window.location.href.toString().split(window.location.host)[1].split("/").filter(String).join(".");
-				var data = JSON.stringify({"service":"ackermannio","path":path + ".sessions"});
-				xhr.send(data);
-			}
-		}
-	</script>
 {% endblock %}

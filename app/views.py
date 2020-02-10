@@ -82,8 +82,11 @@ def post_view(slug):
 
 	if dur < 3:
 		dur = None
+		
+	today = date.today()
+	cpwy = today.year
 
-	return render_template('view_post.html', title=post.title, post=post, dur=dur, auth=has_auth(), current='home')
+	return render_template('view_post.html', title=post.title, post=post, dur=dur, cpwy=cpwy, auth=has_auth(), current='home')
 
 @app.route('/categories')
 def categories():
@@ -107,9 +110,9 @@ def portfolio():
 @app.route('/links')
 @app.route('/about')
 def about():
-    today = date.today()
-    my_age = today.year - 1994 - ((today.month, today.day) < (11, 26))
-    return render_template('about.html', auth=has_auth(), current='about', age=my_age)
+	today = date.today()
+	my_age = today.year - 1994 - ((today.month, today.day) < (11, 26))
+	return render_template('about.html', auth=has_auth(), current='about', age=my_age)
 
 @app.route('/privacy')
 def privacy():

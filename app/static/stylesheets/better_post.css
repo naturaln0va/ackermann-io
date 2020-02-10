@@ -1,8 +1,14 @@
 
+article p {
+  line-height: 1.5;
+}
+
 article code {
 	font-family: monospace;
 	white-space: pre;
 	background: #eee;
+  padding: 0.15em 0.25em;
+  border-radius: 4px;
 }
 article pre code {
   background: #fff;
