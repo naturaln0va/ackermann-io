@@ -3,6 +3,10 @@ article p {
   line-height: 1.5;
 }
 
+article hr {
+  padding: 4em 0;
+}
+
 article code {
 	font-family: monospace;
 	white-space: pre;
