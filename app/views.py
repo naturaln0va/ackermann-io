@@ -139,9 +139,18 @@ def resume():
 def login():
 	if has_auth():
 		return redirect('/')
-	if request.method == 'POST' and request.form['password'] == 'EQjmLRVwDX%;z&Ek94N(Fa7C6MGinbgmpg':
-		session['username'] = 'naturaln0va'
-		return redirect('/')
+	
+	if request.method == 'POST':		
+		try:
+			with open('pw.txt', 'r') as file:
+				password = file.read()
+				
+				if request.form['password'] == password:
+					session['username'] = 'naturaln0va'
+					return redirect('/')
+		except BaseException as err:
+			print('An exception occurred {}'.format(err))
+			return redirect('/')
 	return render_template('login.html', auth=has_auth())
 
 @app.route('/logout')
