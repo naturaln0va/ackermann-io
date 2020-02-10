@@ -4,7 +4,7 @@ from random import randint
 from functools import wraps
 from operator import itemgetter
 from flask import request, session, render_template, redirect, url_for, flash, abort, jsonify, Markup
-from urllib.parse import urljoin
+from urlparse import urljoin
 from werkzeug.utils import secure_filename
 from werkzeug.contrib.atom import AtomFeed
 from datetime import datetime, date
@@ -18,12 +18,12 @@ from .models import Post, Category
 
 @app.errorhandler(404)
 def not_found_error(error):
-	return render_template('404.html', title='Not Found', auth=has_auth()), 404
+    return render_template('404.html', title='Not Found', auth=has_auth()), 404
 
 @app.errorhandler(500)
 def internal_error(error):
-	db.session.rollback()
-	return render_template('500.html', title='500', auth=has_auth()), 500
+    db.session.rollback()
+    return render_template('500.html', title='500', auth=has_auth()), 500
 
 # Helpers
 
@@ -239,8 +239,8 @@ def new_post():
 		db.session.commit()
 		return redirect('/drafts')
 	else:
-		print('Errors in the form:')
-		print(form.errors.items())
+		print 'Errors in the form:'
+		print form.errors.items()
 	return render_template('new_post.html', form=form, auth=has_auth(), current='new_post')
 
 @app.route('/cms', methods=['GET', 'POST'])
