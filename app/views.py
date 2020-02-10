@@ -146,7 +146,7 @@ def login():
 	if request.method == 'POST':		
 		try:
 			with open('pw.txt', 'r') as file:
-				password = file.read()
+				password = file.read().replace('\n', '')
 				
 				if request.form['password'] == password:
 					session['username'] = 'naturaln0va'
