@@ -1,0 +1,17 @@
+{
+  "actions" : {
+    "build" : {
+      "enabled" : true,
+      "path" : "build.sh"
+    },
+    "clean" : {
+      "enabled" : true,
+      "script" : "docker-compose down"
+    },
+    "run" : {
+      "enabled" : true,
+      "script" : "open \"http:\/\/localhost\""
+    }
+  },
+  "identifier" : "41C409FB-9489-4777-8349-AD9DD354E545"
+}

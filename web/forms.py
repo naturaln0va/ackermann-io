@@ -17,4 +17,4 @@ class PostForm(FlaskForm):
 	date = DateField('date', default=datetime.utcnow(), format='%b %d, %Y')
 
 class SearchForm(FlaskForm):
-    search = StringField('search', validators=[DataRequired()])
+  search = StringField('search', validators=[DataRequired()])
