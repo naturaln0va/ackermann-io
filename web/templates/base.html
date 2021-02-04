@@ -13,19 +13,6 @@
 		<link rel="mask-icon" href="/static/favicon/safari-pinned-tab.svg" color="#e51415">
 		<link rel="shortcut icon" href="/static/favicon/favicon.ico">
 		<link rel="stylesheet" type="text/css" href="/static/stylesheets/primary.css">
-
-		<script type="text/javascript">
-		var clicky_site_ids = clicky_site_ids || [];
-		clicky_site_ids.push(101119850);
-		(function() {
-		  var s = document.createElement('script');
-		  s.type = 'text/javascript';
-		  s.async = true;
-		  s.src = '//static.getclicky.com/js';
-		  ( document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0] ).appendChild( s );
-		})();
-		</script>
-		<noscript><p><img alt="Clicky" width="1" height="1" src="//in.getclicky.com/101119850ns.gif" /></p></noscript>
 		
 		{% block stylesheet %}{% endblock %}
 	  {% if title %}
@@ -84,12 +71,6 @@
 							<li><b>drafts</b></li>
 						{% else %}
 							<li><a href="{{ url_for('drafts') }}">drafts</a></li>
-						{% endif %}
-
-						{% if current == 'cms' %}
-							<li><b>media</b></li>
-						{% else %}
-							<li><a href="{{ url_for('cms') }}">media</a></li>
 						{% endif %}
 
 						<li><a href="{{ url_for('logout') }}">logout</a></li>
