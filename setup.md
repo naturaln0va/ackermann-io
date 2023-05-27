@@ -20,7 +20,7 @@ User=ryan
 Group=www-data
 WorkingDirectory=/home/ryan/ackermann
 Environment="PATH=/home/ryan/ackermann/venv/bin"
-ExecStart=/home/ryan/ackermann/venv/bin/gunicorn --workers 3 --bind unix:acker.sock -m 007 app:app
+ExecStart=/home/ryan/ackermann/venv/bin/gunicorn --workers 3 --bind unix:acker.sock -m 007 wsgi:app
 Restart=on-failure
 
 [Install]
