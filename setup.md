@@ -27,6 +27,15 @@ Restart=on-failure
 WantedBy=multi-user.target
 ```
 
+```
+cd ackermann
+
+python3 -m venv venv
+source venv/bin/activate
+python3 -m pip install --upgrade pip
+python3 -m pip install -r requirements.txt
+```
+
 * sudo systemctl start acker
 * sudo systemctl enable acker
 * sudo systemctl status acker
