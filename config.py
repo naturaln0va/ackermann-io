@@ -5,8 +5,15 @@ import os
 # upload settings
 ASSETS_FOLDER = 'app/static/assets'
 
-# secret settings
-SECRET_KEY = 'k?yhGAcb9bFvtH99NYAz[fR87EQFN^6*#q6v'
+# security settings
+skey = None
+filename = 'skey.txt'
+if not os.path.isfile(filename):
+	skey = 'this-is-not-secure'
+else:
+	with open(filename) as file:
+		skey = file.read().replace('\n', '')
+SECRET_KEY = skey
 
 # database settings
 basedir = os.path.abspath(os.path.dirname(__file__))
