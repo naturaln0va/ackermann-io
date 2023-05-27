@@ -1,6 +1,6 @@
 Flask-Markdown==0.3
 Flask-PageDown==0.4.0
-Flask==2.3.2
+Flask==2.2.3
 Flask-SQLAlchemy==3.0.2
 Flask-WTF==1.0.1
 Flask-Bcrypt==1.0.1

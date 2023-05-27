@@ -60,6 +60,15 @@ server {
     proxy_pass http://unix:/home/ryan/ackermann/acker.sock;
   }
 }
+server {
+  listen 80;
+  server_name {ip};
+  
+  location / {
+    include proxy_params;
+    proxy_pass http://unix:/home/ryan/ackermann/acker.sock;
+  }
+}
 ```
 
 sudo systemctl restart nginx
