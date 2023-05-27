@@ -4,9 +4,9 @@ from random import randint
 from functools import wraps
 from operator import itemgetter
 from flask import request, session, render_template, redirect, url_for, flash, abort, jsonify, Markup
-from urlparse import urljoin
+from urllib.parse import urljoin
 from werkzeug.utils import secure_filename
-from werkzeug.contrib.atom import AtomFeed
+from feedwerk.atom import AtomFeed
 from datetime import datetime, date
 from markdown import markdown as md
 from app import app, db
@@ -131,7 +131,7 @@ def feed():
 	for post in posts:
 		url = make_external(post.url())
 		content = Markup(md(post.content))
-		feed.add(post.title, unicode(content), content_type='html', author=author_name, url=url, updated=post.timestamp, published=post.timestamp)
+		feed.add(post.title, content, content_type='html', author=author_name, url=url, updated=post.timestamp, published=post.timestamp)
 	return feed.get_response()
 	
 @app.route('/resume')
@@ -239,8 +239,8 @@ def new_post():
 		db.session.commit()
 		return redirect('/drafts')
 	else:
-		print 'Errors in the form:'
-		print form.errors.items()
+		print('Errors in the form:')
+		print(form.errors.items())
 	return render_template('new_post.html', form=form, auth=has_auth(), current='new_post')
 
 @app.route('/cms', methods=['GET', 'POST'])
